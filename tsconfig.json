@@ -9,7 +9,7 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "strict": true,
-    "skipLibCheck": true
-  },
-  "include": ["qrcode.d.ts"]
+    "skipLibCheck": true,
+    "typeRoots": ["node_modules/@types"]
+  }
 }

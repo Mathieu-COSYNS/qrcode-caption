@@ -54,9 +54,13 @@
     </script>
 
     <div id="qrcode"></div>
-    <script src="./dist/bundle.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.js"></script>
+    <script src="../dist/bundle.js"></script>
+
     <script type="text/javascript">
-      BrowserQR.generate();
+      console.log(QRCodeCaption.toSVG('new'));
+      console.log(QRCodeCaption.toSVG('new', { width: 100 }));
     </script>
   </body>
 </html>
