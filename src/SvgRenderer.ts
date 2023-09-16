@@ -1,20 +1,15 @@
-import { type QRCode, type QRCodeRenderersOptions } from 'qrcode';
+import { type QRCode } from 'qrcode';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { getOptions } from 'qrcode/lib/renderer/utils';
 
+import { QRCodeSvgRendererOptions } from './QRCodeSvgRendererOptions';
+
 function getColorAttrib(color: { a: number; hex: string }, attrib: string) {
   const alpha = color.a / 255;
-  const str = attrib + '="' + color.hex + '"';
+  const str = `${attrib}="${color.hex}"`;
 
-  return alpha < 1 ? str + ' ' + attrib + '-opacity="' + alpha.toFixed(2).slice(1) + '"' : str;
-}
-
-function svgCmd(cmd: string, x: number, y?: string | number) {
-  let str = cmd + x;
-  if (typeof y !== 'undefined') str += ' ' + y;
-
-  return str;
+  return str + (alpha < 1 ? ` ${attrib}-opacity="${alpha.toFixed(2).slice(1)}"` : '');
 }
 
 function qrToPath(data: Uint8Array, size: number, margin: number) {
@@ -33,7 +28,7 @@ function qrToPath(data: Uint8Array, size: number, margin: number) {
       lineLength++;
 
       if (!(i > 0 && col > 0 && data[i - 1])) {
-        path += newRow ? svgCmd('M', col + margin, 0.5 + row + margin) : svgCmd('m', moveBy, 0);
+        path += newRow ? `M${col + margin} ${0.5 + row + margin}` : `m${moveBy} 0`;
 
         moveBy = 0;
         newRow = false;
@@ -51,32 +46,33 @@ function qrToPath(data: Uint8Array, size: number, margin: number) {
   return path;
 }
 
-export function render(qrData: QRCode, caption?: string, options?: QRCodeRenderersOptions) {
+export function render(qrData: QRCode, caption?: string, options?: QRCodeSvgRendererOptions) {
   const opts = getOptions(options);
+  const fontSizeFactor = options?.fontSizeFactor || 0.2;
   const size = qrData.modules.size;
   const data = qrData.modules.data;
-  const qrcodesize = size + opts.margin * 2;
+
+  const qrcodeWidth = size + opts.margin * 2;
+  const captionFontSize = size * fontSizeFactor;
+  const captionHeight = Math.ceil(captionFontSize);
+  const qrcodeHeight = qrcodeWidth + (caption ? captionHeight : 0);
 
   const bg = !opts.color.light.a
     ? ''
-    : '<path ' + getColorAttrib(opts.color.light, 'fill') + ' d="M0 0h' + qrcodesize + 'v' + qrcodesize + 'H0z"/>';
+    : `<rect ${getColorAttrib(opts.color.light, 'fill')} width="${qrcodeWidth}" height="${qrcodeHeight}"/>`;
 
-  const path =
-    '<path ' + getColorAttrib(opts.color.dark, 'stroke') + ' d="' + qrToPath(data, size, opts.margin) + '"/>';
+  const fg = `<path ${getColorAttrib(opts.color.dark, 'stroke')} d="${qrToPath(data, size, opts.margin)}"/>`;
 
-  const viewBox = 'viewBox="' + '0 0 ' + qrcodesize + ' ' + qrcodesize + '"';
+  const text = caption
+    ? `<text y="${
+        qrcodeHeight - opts.margin
+      }" x="50%" text-anchor="middle" font-size="${captionFontSize}">${caption}</text>`
+    : '';
 
-  const scale = !opts.scale ? '' : 'width="' + qrcodesize * opts.scale + '" height="' + qrcodesize * opts.scale + '" ';
-  const width = !opts.width ? scale : 'width="' + opts.width + '" height="' + opts.width + '" ';
+  const width = !opts.width ? qrcodeWidth * opts.scale : opts.width;
+  const height = width * (qrcodeHeight / qrcodeWidth);
 
-  const svgTag =
-    '<svg xmlns="http://www.w3.org/2000/svg" ' +
-    width +
-    viewBox +
-    ' shape-rendering="crispEdges">' +
-    bg +
-    path +
-    '</svg>\n';
+  const svgTag = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${qrcodeWidth} ${qrcodeHeight}" shape-rendering="crispEdges">${bg}${fg}${text}</svg>`;
 
   return svgTag;
 }

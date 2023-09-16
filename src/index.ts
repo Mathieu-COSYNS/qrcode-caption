@@ -1,8 +1,8 @@
-import { type QRCodeRenderersOptions } from 'qrcode';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { create } from 'qrcode/lib/core/qrcode';
 
+import { QRCodeSvgRendererOptions } from './QRCodeSvgRendererOptions';
 import { render } from './SvgRenderer';
 
 /**
@@ -12,10 +12,14 @@ import { render } from './SvgRenderer';
  * @param caption The QR Code caption
  * @param options Optional configuration
  */
-export function toSVG(text: string, caption?: string, options?: QRCodeRenderersOptions): string;
-export function toSVG(text: string, options?: QRCodeRenderersOptions): string;
+export function toSVG(text: string, caption?: string, options?: QRCodeSvgRendererOptions): string;
+export function toSVG(text: string, options?: QRCodeSvgRendererOptions): string;
 
-export function toSVG(text: string, captionOrOptions?: string | QRCodeRenderersOptions, opts?: QRCodeRenderersOptions) {
+export function toSVG(
+  text: string,
+  captionOrOptions?: string | QRCodeSvgRendererOptions,
+  opts?: QRCodeSvgRendererOptions,
+) {
   const data = create(text, opts);
 
   const { caption, options } =
