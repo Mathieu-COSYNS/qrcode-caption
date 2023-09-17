@@ -1,5 +1,8 @@
 import { QRCodeRenderersOptions } from 'qrcode';
 
-export interface QRCodeSvgRendererOptions extends QRCodeRenderersOptions {
-  fontSizeFactor?: number;
+import { type Percentage } from './Percentage';
+
+export interface QRCodeSvgRendererOptions extends Omit<QRCodeRenderersOptions, 'margin'> {
+  fontSize?: Percentage | number;
+  margin?: Percentage | number;
 }

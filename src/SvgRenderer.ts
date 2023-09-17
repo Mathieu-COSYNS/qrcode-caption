@@ -3,7 +3,24 @@ import { type QRCode } from 'qrcode';
 // @ts-ignore
 import { getOptions } from 'qrcode/lib/renderer/utils';
 
-import { QRCodeSvgRendererOptions } from './QRCodeSvgRendererOptions';
+import { type Percentage } from './Percentage';
+import { type QRCodeSvgRendererOptions } from './QRCodeSvgRendererOptions';
+
+function parsePercentageOrNumber(value: Percentage | number | undefined, size: number, defaultValue: number) {
+  if (typeof value === 'string') {
+    return size * (Number(value.slice(0, -1)) / 100);
+  }
+  value = value ?? defaultValue;
+  if (value < 0) return defaultValue;
+  return value;
+}
+
+function getExtendedOptions(options: QRCodeSvgRendererOptions | undefined, size: number) {
+  return {
+    fontSize: parsePercentageOrNumber(options?.fontSize, size, 4),
+    margin: parsePercentageOrNumber(options?.margin, size, 4),
+  };
+}
 
 function getColorAttrib(color: { a: number; hex: string }, attrib: string) {
   const alpha = color.a / 255;
@@ -47,14 +64,13 @@ function qrToPath(data: Uint8Array, size: number, margin: number) {
 }
 
 export function render(qrData: QRCode, caption?: string, options?: QRCodeSvgRendererOptions) {
-  const opts = getOptions(options);
-  const fontSizeFactor = options?.fontSizeFactor || 0.2;
   const size = qrData.modules.size;
   const data = qrData.modules.data;
+  const opts = { ...getOptions(options), ...getExtendedOptions(options, size) };
 
   const qrcodeWidth = size + opts.margin * 2;
-  const captionFontSize = size * fontSizeFactor;
-  const captionHeight = Math.ceil(captionFontSize);
+  const captionHeight = opts.fontSize * 1.1;
+  const captionEstimatedBaseline = captionHeight * (3 / 4);
   const qrcodeHeight = qrcodeWidth + (caption ? captionHeight : 0);
 
   const bg = !opts.color.light.a
@@ -65,8 +81,10 @@ export function render(qrData: QRCode, caption?: string, options?: QRCodeSvgRend
 
   const text = caption
     ? `<text y="${
-        qrcodeHeight - opts.margin
-      }" x="50%" text-anchor="middle" font-size="${captionFontSize}">${caption}</text>`
+        qrcodeWidth - opts.margin / 2 + captionEstimatedBaseline
+      }" x="50%" text-anchor="middle" font-family="Verdana, 'Bitstream Vera Sans', 'DejaVu Sans', Tahoma, Geneva, Arial, Sans-serif" font-size="${
+        opts.fontSize
+      }">${caption}</text>`
     : '';
 
   const width = !opts.width ? qrcodeWidth * opts.scale : opts.width;
