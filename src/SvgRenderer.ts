@@ -1,10 +1,18 @@
 import { type QRCode } from 'qrcode';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-import { getOptions } from 'qrcode/lib/renderer/utils';
+import { getOptions as getLibOptions } from 'qrcode/lib/renderer/utils';
 
 import { type Percentage } from './Percentage';
 import { type QRCodeSvgRendererOptions } from './QRCodeSvgRendererOptions';
+
+type Color = {
+  r: number;
+  g: number;
+  b: number;
+  a: number;
+  hex: `#${number}`;
+};
 
 function parsePercentageOrNumber(value: Percentage | number | undefined, size: number, defaultValue: number) {
   if (typeof value === 'string') {
@@ -15,14 +23,24 @@ function parsePercentageOrNumber(value: Percentage | number | undefined, size: n
   return value;
 }
 
-function getExtendedOptions(options: QRCodeSvgRendererOptions | undefined, size: number) {
+function getOptions(options: QRCodeSvgRendererOptions | undefined, size: number) {
+  if (options?.['aria-label'] && options?.['aria-hidden'])
+    throw new Error('Both aria-label and aria-hidden can not be set');
+  if (options?.['aria-labelledby'] && options?.['aria-hidden'])
+    throw new Error('Both aria-labelledby and aria-hidden can not be set');
   return {
-    fontSize: parsePercentageOrNumber(options?.fontSize, size, 4),
+    width: options?.width,
+    scale: options?.scale || 4,
     margin: parsePercentageOrNumber(options?.margin, size, 4),
+    color: getLibOptions(options).color as { light: Color; dark: Color },
+    fontSize: parsePercentageOrNumber(options?.fontSize, size, 4),
+    'aria-label': options?.['aria-label'],
+    'aria-labelledby': options?.['aria-labelledby'],
+    'aria-hidden': options?.['aria-hidden'] ?? false,
   };
 }
 
-function getColorAttrib(color: { a: number; hex: string }, attrib: string) {
+function getColorAttrib(color: Color, attrib: string) {
   const alpha = color.a / 255;
   const str = `${attrib}="${color.hex}"`;
 
@@ -66,7 +84,7 @@ function qrToPath(data: Uint8Array, size: number, margin: number) {
 export function render(qrData: QRCode, caption?: string, options?: QRCodeSvgRendererOptions) {
   const size = qrData.modules.size;
   const data = qrData.modules.data;
-  const opts = { ...getOptions(options), ...getExtendedOptions(options, size) };
+  const opts = getOptions(options, size);
 
   const qrcodeWidth = size + opts.margin * 2;
   const captionHeight = opts.fontSize * 1.1;
@@ -90,7 +108,18 @@ export function render(qrData: QRCode, caption?: string, options?: QRCodeSvgRend
   const width = !opts.width ? qrcodeWidth * opts.scale : opts.width;
   const height = width * (qrcodeHeight / qrcodeWidth);
 
-  const svgTag = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${qrcodeWidth} ${qrcodeHeight}" shape-rendering="crispEdges">${bg}${fg}${text}</svg>`;
+  const attributes = [];
+
+  attributes.push(`width="${width}"`);
+  attributes.push(`height="${height}"`);
+  attributes.push(`viewBox="0 0 ${qrcodeWidth} ${qrcodeHeight}"`);
+  attributes.push('shape-rendering="crispEdges"');
+
+  if (opts['aria-label']) attributes.push(`aria-label="${opts['aria-label']}"`);
+  if (opts['aria-labelledby']) attributes.push(`aria-labelledby="${opts['aria-labelledby']}"`);
+  if (opts['aria-hidden']) attributes.push('aria-hidden="true"');
+
+  const svgTag = `<svg xmlns="http://www.w3.org/2000/svg" ${attributes.join(' ')}>${bg}${fg}${text}</svg>`;
 
   return svgTag;
 }

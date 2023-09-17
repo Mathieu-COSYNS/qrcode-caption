@@ -137,6 +137,9 @@ it.each([
     },
     snapshot: 27,
   },
+  { text: 'new', options: { 'aria-hidden': true }, snapshot: 28 },
+  { text: 'new', options: { 'aria-label': 'QR Code new' }, snapshot: 29 },
+  { text: 'new', options: { 'aria-labelledby': '#test' }, snapshot: 30 },
 ])(
   'should render SVG $snapshot',
   ({
@@ -152,5 +155,33 @@ it.each([
   }) => {
     const result = QRCodeCaption.toSVG(text, caption, options);
     expect(result).toMatchFileSnapshot(`__snapshots__/${snapshot}.svg`);
+  },
+);
+
+it.each([
+  {
+    text: 'new',
+    options: { 'aria-hidden': true, 'aria-label': 'QR Code new' },
+    error: 'Both aria-label and aria-hidden can not be set',
+  },
+  {
+    text: 'new',
+    options: { 'aria-hidden': true, 'aria-labelledby': '#test' },
+    error: 'Both aria-labelledby and aria-hidden can not be set',
+  },
+])(
+  'should not render SVG and throw $error',
+  ({
+    text,
+    caption,
+    options,
+    error,
+  }: {
+    text: string;
+    caption?: string;
+    options?: QRCodeSvgRendererOptions;
+    error: string;
+  }) => {
+    expect(() => QRCodeCaption.toSVG(text, caption, options)).toThrowError(error);
   },
 );
