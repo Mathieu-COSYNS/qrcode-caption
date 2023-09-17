@@ -1,7 +1,6 @@
 import { expect, it } from 'vitest';
 
-import * as QRCodeCaption from '../src/index';
-import { QRCodeSvgRendererOptions } from '../src/QRCodeSvgRendererOptions';
+import { toSVG, type QRCodeOptions } from '../src/core';
 
 it.each([
   { text: 'new', snapshot: 1 },
@@ -150,10 +149,10 @@ it.each([
   }: {
     text: string;
     caption?: string;
-    options?: QRCodeSvgRendererOptions;
+    options?: QRCodeOptions;
     snapshot: number;
   }) => {
-    const result = QRCodeCaption.toSVG(text, caption, options);
+    const result = toSVG(text, caption, options);
     expect(result).toMatchFileSnapshot(`__snapshots__/${snapshot}.svg`);
   },
 );
@@ -171,17 +170,7 @@ it.each([
   },
 ])(
   'should not render SVG and throw $error',
-  ({
-    text,
-    caption,
-    options,
-    error,
-  }: {
-    text: string;
-    caption?: string;
-    options?: QRCodeSvgRendererOptions;
-    error: string;
-  }) => {
-    expect(() => QRCodeCaption.toSVG(text, caption, options)).toThrowError(error);
+  ({ text, caption, options, error }: { text: string; caption?: string; options?: QRCodeOptions; error: string }) => {
+    expect(() => toSVG(text, caption, options)).toThrowError(error);
   },
 );
