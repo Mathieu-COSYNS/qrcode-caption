@@ -5,62 +5,84 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>QR Code</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="../dist/bundle.js"></script>
   </head>
   <body>
-    <button id="btn">Generate</button>
-    <script>
-      function generateQrCode() {
-        QRCode.toDataURL('sample text', function (error, url) {
-          if (error) {
-            console.error(error);
-            return;
-          }
-
-          const size = 256;
-          const background = true;
-          const shortName = 'P2';
-          const name = 'test';
-
-          const onImageDownload = () => {
-            const canvas = document.getElementById('qr');
-            const ctx = canvas.getContext('2d');
-            const img = new Image();
-            img.onload = () => {
-              canvas.width = size;
-              canvas.height = size + (size / 16) * 1.5;
-              if (background) {
-                ctx.fillStyle = '#fff';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-              }
-              ctx.drawImage(img, size / 16, size / 16, size - size / 8, size - size / 8);
-              ctx.fillStyle = '#000';
-              ctx.fillStyle = '#000';
-              ctx.font = `${(size / 16) * 1.5}px Arial`;
-              ctx.textAlign = 'center';
-              ctx.fillText(`Valeur: ${shortName}`, canvas.width / 2, size + (canvas.height - size) / 2);
-              const pngFile = canvas.toDataURL('image/png');
-              const downloadLink = document.createElement('a');
-              downloadLink.download = `QRCode_${name}`;
-              downloadLink.href = `${pngFile}`;
-              downloadLink.click();
-            };
-            img.src = qrCodeDataURL;
-          };
+    <h1>Usage Examples</h1>
+    <section>
+      <h2>Example 1</h2>
+      <code id="example1"></code>
+      <script type="text/javascript">
+        document.getElementById('example1').textContent = QRCodeCaption.toSVG('https://example.com', 'Example 1', {
+          width: 100,
         });
-      }
+      </script>
+    </section>
 
-      var btn = document.getElementById('btn');
-      btn.addEventListener('click', generateQrCode);
-    </script>
+    <section>
+      <h2>Example 2</h2>
+      <div id="example2"></div>
+      <script type="text/javascript">
+        document.getElementById('example2').innerHTML = QRCodeCaption.toSVG('https://example.com', 'Example 2', {
+          width: 100,
+        });
+      </script>
+    </section>
 
-    <div id="qrcode"></div>
+    <section>
+      <h2>Example 3</h2>
+      <img id="example3" alt="example" />
+      <script type="text/javascript">
+        document.getElementById('example3').src = QRCodeCaption.toDataURL('https://example.com', 'Example 3', {
+          width: 100,
+        });
+      </script>
+    </section>
 
-    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.js"></script>
-    <script src="../dist/bundle.js"></script>
+    <section>
+      <h2>Example 4</h2>
+      <img id="example4" alt="example" />
+      <script type="text/javascript">
+        async function example4() {
+          const result = QRCodeCaption.toDataURL('https://example.com', 'Example 4', { width: 100 });
+          const png = await QRCodeCaption.convertDataURLType(result, 'image/png');
+          document.getElementById('example4').src = png;
+        }
 
-    <script type="text/javascript">
-      console.log(QRCodeCaption.toSVG('new'));
-      console.log(QRCodeCaption.toSVG('new', { width: 100 }));
-    </script>
+        example4();
+      </script>
+    </section>
+
+    <section>
+      <h2>Example 5</h2>
+      <button id="example5">Download as PNG</button>
+      <script type="text/javascript">
+        async function example5() {
+          const result = QRCodeCaption.toDataURL('https://example.com', 'Example 5', { width: 100 });
+          const png = await QRCodeCaption.convertDataURLType(result, 'image/png');
+          QRCodeCaption.downloadDataURL(png, 'Example5.png');
+        }
+
+        document.getElementById('example5').addEventListener('click', example5);
+      </script>
+    </section>
+
+    <section>
+      <h2>Example 6</h2>
+      <img id="example6-img" alt="example" />
+      <button id="example6-btn">Download as PNG</button>
+      <script type="text/javascript">
+        document.getElementById('example6-img').src = QRCodeCaption.toDataURL('https://example.com', 'Example 6', {
+          width: 100,
+        });
+
+        async function example6_onclick() {
+          const png = await QRCodeCaption.convertDataURLType(document.getElementById('example6-img').src, 'image/png');
+          QRCodeCaption.downloadDataURL(png, 'Example6.png');
+        }
+
+        document.getElementById('example6-btn').addEventListener('click', example6_onclick);
+      </script>
+    </section>
   </body>
 </html>
