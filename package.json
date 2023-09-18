@@ -19,6 +19,7 @@
     "dev": "rollup -c -w",
     "build": "rollup -c",
     "test": "vitest",
+    "release": "pnpm run build && pnpm changeset publish",
     "format": "prettier . --write",
     "lint": "eslint . --report-unused-disable-directives --max-warnings 0"
   },
@@ -37,6 +38,7 @@
   "devDependencies": {
     "@babel/core": "^7.22.19",
     "@babel/preset-env": "^7.22.15",
+    "@changesets/cli": "^2.26.2",
     "@ianvs/prettier-plugin-sort-imports": "^4.1.0",
     "@rollup/plugin-babel": "^6.0.3",
     "@rollup/plugin-commonjs": "^25.0.4",
