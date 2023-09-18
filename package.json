@@ -11,7 +11,10 @@
     "caption"
   ],
   "type": "module",
-  "main": "index.js",
+  "module": "dist/bundle.esm.min.js",
+  "browser": "dist/bundle.umd.min.js",
+  "main": "dist/bundle.esm.min.js",
+  "types": "dist/qrcode-caption.d.ts",
   "scripts": {
     "dev": "rollup -c -w",
     "build": "rollup -c",
@@ -49,6 +52,7 @@
     "eslint-plugin-prettier": "^5.0.0",
     "prettier": "^3.0.3",
     "rollup": "^3.29.1",
+    "rollup-plugin-dts": "^6.0.2",
     "tslib": "^2.6.2",
     "typescript": "^5.2.2",
     "vitest": "^0.34.4"
