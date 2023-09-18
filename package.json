@@ -1,7 +1,7 @@
 {
   "name": "qrcode-caption",
   "description": "Wrapper around the qrcode lib to generate QR codes with a caption",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Mathieu-COSYNS",
   "keywords": [
     "qr",
