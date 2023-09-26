@@ -139,6 +139,7 @@ it.each([
   { text: 'new', options: { 'aria-hidden': true }, snapshot: 28 },
   { text: 'new', options: { 'aria-label': 'QR Code new' }, snapshot: 29 },
   { text: 'new', options: { 'aria-labelledby': '#test' }, snapshot: 30 },
+  { text: 'new', caption: 'caption', options: { color: { dark: '#0000007f' } }, snapshot: 31 },
 ])(
   'should render SVG $snapshot',
   ({

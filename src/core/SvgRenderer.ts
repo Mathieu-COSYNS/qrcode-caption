@@ -102,7 +102,7 @@ export function render(qrData: QRCode, caption?: string, options?: QRCodeSvgRend
         qrcodeWidth - opts.margin / 2 + captionEstimatedBaseline
       }" x="50%" text-anchor="middle" font-family="Verdana, 'Bitstream Vera Sans', 'DejaVu Sans', Tahoma, Geneva, Arial, Sans-serif" font-size="${
         opts.fontSize
-      }">${caption}</text>`
+      }" ${getColorAttrib(opts.color.dark, 'fill')}>${caption}</text>`
     : '';
 
   const width = !opts.width ? qrcodeWidth * opts.scale : opts.width;
