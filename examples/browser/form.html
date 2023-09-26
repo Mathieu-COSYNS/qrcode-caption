@@ -1,0 +1,231 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>QR Code Form</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <style type="text/css">
+      :root {
+        color-scheme: light dark;
+        font-family: 'Brush Script MT', cursive;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        margin: 0;
+        padding: 8px;
+        overflow-y: hidden;
+      }
+      h1 {
+        text-align: center;
+      }
+      main {
+        display: flex;
+        overflow-y: hidden;
+        flex-grow: 1;
+        gap: 1em;
+      }
+      label {
+        display: block;
+        margin-top: 0.5em;
+        margin-bottom: 0.2em;
+        font-size: 0.8rem;
+        font-weight: bolder;
+      }
+      textarea {
+        resize: vertical;
+      }
+      input,
+      select,
+      textarea {
+        width: 100%;
+        padding-block: 4px;
+      }
+      textarea {
+        min-height: 2.5em;
+      }
+      button {
+        margin-top: 0.5em;
+      }
+      pre,
+      code {
+        background-color: var(--code-bg, #272822);
+        color: var(--code-fg, #f8f8f2);
+        border-radius: 0.3rem;
+      }
+      pre {
+        padding: 0.5rem;
+      }
+      #qr-data {
+        width: 100%;
+        max-width: 400px;
+        overflow-y: auto;
+        scrollbar-width: thin;
+      }
+      #qr-preview {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        overflow: scroll;
+      }
+      #qr-preview img {
+        display: block;
+      }
+    </style>
+    <script src="../../dist/bundle.umd.min.js"></script>
+  </head>
+  <body>
+    <h1>QR Code Form</h1>
+    <main>
+      <div id="qr-data">
+        <form id="qr-form">
+          <fieldset>
+            <legend>Data & Caption</legend>
+            <label for="data">Data</label>
+            <textarea id="data" name="data" type="number"></textarea>
+            <label for="caption">Caption</label>
+            <input id="caption" name="caption" />
+          </fieldset>
+          <fieldset>
+            <legend>QR code parameters</legend>
+            <label for="version">Version</label>
+            <input id="version" name="version" type="number" min="1" />
+            <label for="errorCorrectionLevel">Error correction level</label>
+            <select id="errorCorrectionLevel" name="errorCorrectionLevel">
+              <option value="low">low</option>
+              <option value="medium">medium</option>
+              <option value="quartile">quartile</option>
+              <option value="high">high</option>
+              <option value="L">L</option>
+              <option value="M" selected>M</option>
+              <option value="Q">Q</option>
+              <option value="H">H</option>
+            </select>
+            <label for="maskPattern">Mask pattern</label>
+            <select id="maskPattern" name="maskPattern">
+              <option value="undefined">auto</option>
+              <option value="0">0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+            </select>
+          </fieldset>
+          <fieldset>
+            <legend>Dimension</legend>
+            <label for="scale">Scale</label>
+            <input id="scale" name="scale" />
+            <label for="width">Width</label>
+            <input id="width" name="width" />
+            <label for="margin">Margin</label>
+            <input id="margin" name="margin" />
+            <label for="fontSize">Font size</label>
+            <input id="fontSize" name="fontSize" />
+          </fieldset>
+          <fieldset>
+            <legend>Color</legend>
+            <label for="color.dark">Dark color</label>
+            <input id="color.dark" name="color.dark" type="color" />
+            <label for="color.light">Light color</label>
+            <input id="color.light" name="color.light" type="color" value="#ffffff" />
+          </fieldset>
+          <fieldset>
+            <legend>Accessibility</legend>
+            <label for="aria-label">Aria label</label>
+            <input id="aria-label" name="aria-label" />
+            <label for="aria-labelledby">Aria labelledby</label>
+            <input id="aria-labelledby" name="aria-labelledby" />
+            <label for="aria-hidden">Aria hidden</label>
+            <select id="aria-hidden" name="aria-hidden" type="checkbox" value="true">
+              <option value="undefined">undefined</option>
+              <option value="true">true</option>
+              <option value="false">false</option>
+            </select>
+          </fieldset>
+        </form>
+        <pre><code id="qr-options"></code></pre>
+      </div>
+      <div id="qr-preview">
+        <img alt="Generated QR Code" />
+        <button type="button">Download</button>
+        <pre style="--code-bg: #dc2626"></pre>
+      </div>
+    </main>
+    <script>
+      function generateQRCode() {
+        const form = document.querySelector('#qr-form');
+        const formData = Object.fromEntries(new FormData(form));
+
+        const data = formData.data;
+        const caption = formData.caption;
+        const options = {
+          version: formData.version,
+          errorCorrectionLevel: formData.errorCorrectionLevel,
+          maskPattern: formData.maskPattern !== 'undefined' ? formData.maskPattern : undefined,
+          color: {
+            dark: formData['color.dark'],
+            light: formData['color.light'],
+          },
+          margin: formData.margin || undefined,
+          scale: formData.scale || undefined,
+          width: formData.width || undefined,
+          fontSize: formData.fontSize || undefined,
+          'aria-label': formData['aria-label'] || undefined,
+          'aria-labelledby': formData['aria-labelledby'] || undefined,
+          'aria-hidden': formData['aria-hidden'] !== 'undefined' ? formData['aria-hidden'] === 'true' : undefined,
+        };
+
+        const opt = document.querySelector('#qr-options');
+        opt.textContent = JSON.stringify(options, undefined, 2);
+
+        const img = document.querySelector('#qr-preview img');
+        const btn = document.querySelector('#qr-preview button');
+        const pre = document.querySelector('#qr-preview pre');
+
+        try {
+          img.src = QRCodeCaption.toDataURL(data, caption, options);
+          img.style.display = 'block';
+          btn.style.display = 'block';
+          pre.style.display = 'none';
+        } catch (e) {
+          console.error(e);
+          img.style.display = 'none';
+          btn.style.display = 'none';
+          pre.style.display = 'block';
+          pre.textContent = e;
+        }
+      }
+
+      const inputs = document.querySelectorAll('#qr-form input, #qr-form select, #qr-form textarea');
+      for (const input of inputs) {
+        input.addEventListener('input', function () {
+          if (this.checkValidity()) {
+            generateQRCode();
+          } else {
+            console.error('invalid input');
+          }
+        });
+      }
+
+      async function download() {
+        const png = await QRCodeCaption.convertDataURLType(document.querySelector('#qr-preview img').src, 'image/png');
+        QRCodeCaption.downloadDataURL(png, 'QRCode.png');
+      }
+
+      document.querySelector('#qr-preview button').addEventListener('click', download);
+
+      generateQRCode();
+    </script>
+  </body>
+</html>
