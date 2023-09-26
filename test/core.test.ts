@@ -1,6 +1,6 @@
 import { expect, it } from 'vitest';
 
-import { toSVG, type QRCodeOptions } from '../src/core';
+import { toDataURL, toSVG, type QRCodeOptions } from '../src/core';
 
 it.each([
   { text: 'new', snapshot: 1 },
@@ -142,6 +142,13 @@ it.each([
   { text: 'new', caption: 'caption', options: { color: { dark: '#0000007f' } }, snapshot: 31 },
   { text: 'new', caption: 'caption', options: { margin: '10' as unknown as number }, snapshot: 32 },
   { text: 'new', caption: 'caption', options: { fontSize: '14' as unknown as number }, snapshot: 33 },
+  { text: 'new', caption: '@&/\\#€<>\'"', snapshot: 34 },
+  { text: 'new', options: { margin: 'x' as unknown as number }, snapshot: 1 },
+  { text: 'new', options: { width: 'x' as unknown as number }, snapshot: 1 },
+  { text: 'new', options: { scale: 'x' as unknown as number }, snapshot: 1 },
+  { text: 'new', options: { fontSize: 'x' as unknown as number }, snapshot: 1 },
+  { text: 'new', options: { 'aria-hidden': 'x' as unknown as boolean }, snapshot: 1 },
+  { text: 'new', options: { 'aria-hidden': 'true' as unknown as boolean }, snapshot: 1 },
 ])(
   'should render SVG $snapshot',
   ({
@@ -155,8 +162,10 @@ it.each([
     options?: QRCodeOptions;
     snapshot: number;
   }) => {
-    const result = toSVG(text, caption, options);
-    expect(result).toMatchFileSnapshot(`__snapshots__/${snapshot}.svg`);
+    const svg = toSVG(text, caption, options);
+    expect(svg).toMatchFileSnapshot(`__snapshots__/${snapshot}.svg`);
+    const dataUrl = toDataURL(text, caption, options);
+    expect(dataUrl).toMatchFileSnapshot(`__snapshots__/${snapshot}.txt`);
   },
 );
 

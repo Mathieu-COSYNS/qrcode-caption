@@ -1,3 +1,4 @@
+import svgToMiniDataURI from 'mini-svg-data-uri';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { create } from 'qrcode/lib/core/qrcode';
@@ -49,5 +50,7 @@ export function toDataURL(text: string, captionOrOptions?: string | QRCodeOption
   const { caption, options } = getCaptionAndOptions(captionOrOptions, opts);
   const svg = toSVG(text, caption, options);
 
-  return `data:image/svg+xml;base64,${btoa(svg)}`;
+  return svgToMiniDataURI(svg)
+    .replace(/font-family='/, 'font-family=%22')
+    .replace(/serif'/, 'serif%22');
 }

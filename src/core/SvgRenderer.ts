@@ -2,6 +2,7 @@ import { type QRCode } from 'qrcode';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { getOptions as getLibOptions } from 'qrcode/lib/renderer/utils';
+import { escape } from 'underscore';
 
 import { type Percentage } from './Percentage';
 import { type QRCodeSvgRendererOptions } from './QRCodeSvgRendererOptions';
@@ -14,13 +15,20 @@ type Color = {
   hex: `#${number}`;
 };
 
+function parseNumber<T>(value: unknown, defaultValue: T, options: { min?: number; max?: number }) {
+  if (value === null || value === undefined) return defaultValue;
+  const result = Number(value);
+  if (isNaN(result)) return defaultValue;
+  if (options.min && result < options.min) return defaultValue;
+  if (options.max && result > options.max) return defaultValue;
+  return result;
+}
+
 function parsePercentageOrNumber(value: Percentage | number | undefined, size: number, defaultValue: number) {
   if (typeof value === 'string' && value.endsWith('%')) {
     return size * (Number(value.slice(0, -1)) / 100);
   }
-  value = Number(value ?? defaultValue);
-  if (value < 0) return defaultValue;
-  return value;
+  return parseNumber(value, defaultValue, { min: 0 });
 }
 
 function getOptions(options: QRCodeSvgRendererOptions | undefined, size: number) {
@@ -29,14 +37,14 @@ function getOptions(options: QRCodeSvgRendererOptions | undefined, size: number)
   if (options?.['aria-labelledby'] && options?.['aria-hidden'])
     throw new Error('Both aria-labelledby and aria-hidden can not be set');
   return {
-    width: options?.width,
-    scale: options?.scale || 4,
+    width: parseNumber(options?.width, undefined, { min: 1 }),
+    scale: parseNumber(options?.scale, 4, { min: 1 }),
     margin: parsePercentageOrNumber(options?.margin, size, 4),
     color: getLibOptions(options).color as { light: Color; dark: Color },
     fontSize: parsePercentageOrNumber(options?.fontSize, size, 4),
-    'aria-label': options?.['aria-label'],
-    'aria-labelledby': options?.['aria-labelledby'],
-    'aria-hidden': options?.['aria-hidden'] ?? false,
+    'aria-label': options?.['aria-label'] ? escape(options['aria-label']) : undefined,
+    'aria-labelledby': options?.['aria-labelledby'] ? escape(options['aria-labelledby']) : undefined,
+    'aria-hidden': options?.['aria-hidden'] === true,
   };
 }
 
@@ -102,7 +110,7 @@ export function render(qrData: QRCode, caption?: string, options?: QRCodeSvgRend
         qrcodeWidth - opts.margin / 2 + captionEstimatedBaseline
       }" x="50%" text-anchor="middle" font-family="Verdana, 'Bitstream Vera Sans', 'DejaVu Sans', Tahoma, Geneva, Arial, Sans-serif" font-size="${
         opts.fontSize
-      }" ${getColorAttrib(opts.color.dark, 'fill')}>${caption}</text>`
+      }" ${getColorAttrib(opts.color.dark, 'fill')}>${escape(caption)}</text>`
     : '';
 
   const width = !opts.width ? qrcodeWidth * opts.scale : opts.width;
