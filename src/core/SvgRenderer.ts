@@ -15,10 +15,10 @@ type Color = {
 };
 
 function parsePercentageOrNumber(value: Percentage | number | undefined, size: number, defaultValue: number) {
-  if (typeof value === 'string') {
+  if (typeof value === 'string' && value.endsWith('%')) {
     return size * (Number(value.slice(0, -1)) / 100);
   }
-  value = value ?? defaultValue;
+  value = Number(value ?? defaultValue);
   if (value < 0) return defaultValue;
   return value;
 }
