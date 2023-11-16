@@ -1,5 +1,20 @@
 # qrcode-caption
 
+## 0.1.0
+
+### Minor Changes
+
+- 6bdea10: Accept margin and fontSize number as string
+
+### Patch Changes
+
+- 6bdea10: Fix: caption not rendered in correct color
+- 6bdea10: Add example with a complex form
+- 6bdea10: Fix: inputs not escaped correctly
+- 6bdea10: Add example with pnpm
+- 6bdea10: build(deps): upgrade package dependencies
+- 6bdea10: Fix overflow in form example
+
 ## 0.0.2
 
 ### Patch Changes
