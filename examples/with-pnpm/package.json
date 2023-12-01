@@ -12,6 +12,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "qrcode-caption": "^0.0.2"
+    "qrcode-caption": "*"
   }
 }

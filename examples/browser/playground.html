@@ -1,93 +1,16 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>QR Code Form</title>
+    <title>qrcode-caption Playground</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="color-scheme" content="light dark" />
-    <style type="text/css">
-      :root {
-        color-scheme: light dark;
-        font-family: 'Brush Script MT', cursive;
-      }
-      * {
-        box-sizing: border-box;
-      }
-      body {
-        display: flex;
-        flex-direction: column;
-        height: 100vh;
-        margin: 0;
-        padding: 8px;
-        overflow-y: hidden;
-      }
-      h1 {
-        text-align: center;
-      }
-      main {
-        display: flex;
-        overflow-y: hidden;
-        flex-grow: 1;
-        gap: 1em;
-      }
-      label {
-        display: block;
-        margin-top: 0.5em;
-        margin-bottom: 0.2em;
-        font-size: 0.8rem;
-        font-weight: bolder;
-      }
-      textarea {
-        resize: vertical;
-      }
-      input,
-      select,
-      textarea {
-        width: 100%;
-        padding-block: 4px;
-      }
-      textarea {
-        min-height: 2.5em;
-      }
-      button {
-        margin-top: 0.5em;
-      }
-      pre,
-      code {
-        background-color: var(--code-bg, #272822);
-        color: var(--code-fg, #f8f8f2);
-        border-radius: 0.3rem;
-      }
-      pre {
-        overflow-x: auto;
-        margin-inline: 0.1rem;
-        padding: 0.5rem;
-      }
-      #qr-data {
-        width: 100%;
-        max-width: 400px;
-        overflow-y: auto;
-        scrollbar-width: thin;
-      }
-      #qr-preview {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        overflow: scroll;
-      }
-      #qr-preview img {
-        display: block;
-      }
-    </style>
-    <script src="../../dist/bundle.umd.min.js"></script>
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/qrcode-caption/dist/bundle.umd.min.js"></script>
   </head>
-  <body>
+  <body class="h-screen">
     <h1>QR Code Form</h1>
-    <main>
-      <div id="qr-data">
+    <main class="panel-container">
+      <div class="left-panel">
         <form id="qr-form">
           <fieldset>
             <legend>Data & Caption</legend>
@@ -158,7 +81,7 @@
         </form>
         <pre><code id="qr-options"></code></pre>
       </div>
-      <div id="qr-preview">
+      <div id="qr-preview" class="right-panel">
         <img alt="Generated QR Code" />
         <button type="button">Download</button>
         <pre style="--code-bg: #dc2626"></pre>

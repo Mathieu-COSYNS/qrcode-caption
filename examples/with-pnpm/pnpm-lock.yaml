@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   qrcode-caption:
-    specifier: ^0.0.2
-    version: 0.0.2
+    specifier: '*'
+    version: 0.1.0
 
 packages:
 
@@ -89,6 +89,11 @@ packages:
       p-locate: 4.1.0
     dev: false
 
+  /mini-svg-data-uri@1.4.4:
+    resolution: {integrity: sha512-r9deDe9p5FJUPZAk3A59wGH7Ii9YrjjWw0jmw/liSbHl2CHiyXj6FcDXDu2K3TjVAXqiJdaw3xxwlZZr9E6nHg==}
+    hasBin: true
+    dev: false
+
   /p-limit@2.3.0:
     resolution: {integrity: sha512-//88mFWSJx8lxCzwdAABTJL2MyWB12+eIY7MDL2SqLmAkeKU9qxRvWuSyTjm3FUmpBEMuFfckAIqEaVGUDxb6w==}
     engines: {node: '>=6'}
@@ -118,10 +123,12 @@ packages:
     engines: {node: '>=10.13.0'}
     dev: false
 
-  /qrcode-caption@0.0.2:
-    resolution: {integrity: sha512-sZCPgoiOplExWiWoqjkKwHCOjGdP0OTam5natNxCm2KXJnQhKvE74OxJNIAgXb3LRGv4Zb/yDVGXm4gMChnh9Q==}
+  /qrcode-caption@0.1.0:
+    resolution: {integrity: sha512-yH4Zq629PovbKL1brG3t82oooL1/RhbHnvfcNHfPJ5O0wePHB4NiCChD5E5BcPYd+Nxmp1lJ/VjxdITxrKSYXg==}
     dependencies:
+      mini-svg-data-uri: 1.4.4
       qrcode: 1.5.3
+      underscore: 1.13.6
     dev: false
 
   /qrcode@1.5.3:
@@ -162,6 +169,10 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       ansi-regex: 5.0.1
+    dev: false
+
+  /underscore@1.13.6:
+    resolution: {integrity: sha512-+A5Sja4HP1M08MaXya7p5LvjuM7K6q/2EaC0+iovj/wOcMsTzMvDFbasi/oSapiwOlt252IqsKqPjCl7huKS0A==}
     dev: false
 
   /which-module@2.0.1:
