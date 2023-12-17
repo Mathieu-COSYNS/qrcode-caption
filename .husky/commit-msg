@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# NUMBER_OF_CHANGESET_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep "\.changeset/.*\.md" | wc -l)
+
+# if [ "$NUMBER_OF_CHANGESET_FILES" -lt 1 ]; then
+#   echo "Missing changeset file" >&2
+#   # TODO:
+#   #   - lint commit message => check format = conventional commits
+#   #   - generate changeset file & include in current commit
+#   exit 1
+# fi
