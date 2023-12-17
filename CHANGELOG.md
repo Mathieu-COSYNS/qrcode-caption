@@ -12,16 +12,16 @@
 
 ### Minor Changes
 
-- 6bdea10: Accept margin and fontSize number as string
+- 8bab82f: Accept margin and fontSize number as string
 
 ### Patch Changes
 
-- 6bdea10: Fix: caption not rendered in correct color
-- 6bdea10: Add example with a complex form
-- 6bdea10: Fix: inputs not escaped correctly
-- 6bdea10: Add example with pnpm
-- 6bdea10: build(deps): upgrade package dependencies
-- 6bdea10: Fix overflow in form example
+- 50bbc43: Fix: caption not rendered in correct color
+- 824df2f: Add example with a complex form
+- 7eac8be: Fix: inputs not escaped correctly
+- 7c32bc5: Add example with pnpm
+- b992e52: build(deps): upgrade package dependencies
+- f0f7ffa: Fix overflow in form example
 
 ## 0.0.2
 
