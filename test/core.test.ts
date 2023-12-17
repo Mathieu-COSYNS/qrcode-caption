@@ -149,6 +149,7 @@ it.each([
   { text: 'new', options: { fontSize: 'x' as unknown as number }, snapshot: 1 },
   { text: 'new', options: { 'aria-hidden': 'x' as unknown as boolean }, snapshot: 1 },
   { text: 'new', options: { 'aria-hidden': 'true' as unknown as boolean }, snapshot: 1 },
+  { text: 'new', options: { width: -1 }, snapshot: 1 },
 ])(
   'should render SVG $snapshot',
   ({
@@ -166,6 +167,13 @@ it.each([
     expect(svg).toMatchFileSnapshot(`__snapshots__/${snapshot}.svg`);
     const dataUrl = toDataURL(text, caption, options);
     expect(dataUrl).toMatchFileSnapshot(`__snapshots__/${snapshot}.txt`);
+
+    if(typeof caption === "undefined") {
+      const svg = toSVG(text, options);
+      expect(svg).toMatchFileSnapshot(`__snapshots__/${snapshot}.svg`);
+      const dataUrl = toDataURL(text, options);
+      expect(dataUrl).toMatchFileSnapshot(`__snapshots__/${snapshot}.txt`);
+    }
   },
 );
 

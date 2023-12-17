@@ -1,4 +1,5 @@
-import { QRCodeRenderersOptions } from 'qrcode';
+/* v8 ignore next 11 */
+import { type QRCodeRenderersOptions } from 'qrcode';
 
 import { type Percentage } from './Percentage';
 

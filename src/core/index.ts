@@ -30,8 +30,8 @@ export function toSVG(text: string, caption?: string, options?: QRCodeOptions): 
 export function toSVG(text: string, options?: QRCodeOptions): string;
 
 export function toSVG(text: string, captionOrOptions?: string | QRCodeOptions, opts?: QRCodeOptions) {
-  const data = create(text, opts);
   const { caption, options } = getCaptionAndOptions(captionOrOptions, opts);
+  const data = create(text, options);
 
   return render(data, caption, options);
 }
