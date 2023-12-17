@@ -1,5 +1,12 @@
 # qrcode-caption
 
+## 0.1.1
+
+### Patch Changes
+
+- f32d387: docs(examples): Improve examples
+- d1aceda: build(dev-deps): bump dev dependencies
+
 ## 0.1.0
 
 ### Minor Changes
