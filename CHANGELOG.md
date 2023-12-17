@@ -4,6 +4,7 @@
 
 ### Patch Changes
 
+- c8089df: fix options not recognized when caption is not provided in toSVG
 - f32d387: docs(examples): Improve examples
 - d1aceda: build(dev-deps): bump dev dependencies
 
