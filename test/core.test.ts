@@ -168,7 +168,7 @@ it.each([
     const dataUrl = toDataURL(text, caption, options);
     expect(dataUrl).toMatchFileSnapshot(`__snapshots__/${snapshot}.txt`);
 
-    if(typeof caption === "undefined") {
+    if (typeof caption === 'undefined') {
       const svg = toSVG(text, options);
       expect(svg).toMatchFileSnapshot(`__snapshots__/${snapshot}.svg`);
       const dataUrl = toDataURL(text, options);
