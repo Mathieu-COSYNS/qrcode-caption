@@ -44,7 +44,6 @@
     "@acme/eslint-config": "0.0.0",
     "@babel/core": "^7.23.6",
     "@babel/preset-env": "^7.23.6",
-    "@changesets/cli": "^2.27.1",
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-eslint": "^9.0.5",

@@ -16,6 +16,7 @@
   "dependencies": {
     "@acme/prettier-config": "^0.0.0",
     "@acme/typescript-config": "^0.0.0",
+    "@changesets/cli": "^2.27.1",
     "@manypkg/cli": "^0.21.1",
     "prettier": "^3.1.1",
     "turbo": "^1.11.2",
