@@ -10,19 +10,30 @@
     "qrcode",
     "caption"
   ],
+  "files": [
+    "dist/*"
+  ],
   "type": "module",
-  "module": "dist/bundle.esm.min.js",
-  "browser": "dist/bundle.umd.min.js",
-  "main": "dist/bundle.esm.min.js",
-  "types": "dist/qrcode-caption.d.ts",
+  "sideEffects": false,
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.js"
+    }
+  },
   "scripts": {
-    "dev": "rollup -c -w",
-    "build": "rollup -c",
+    "dev": "tsup --watch",
+    "build": "tsup",
     "test": "vitest",
     "coverage": "vitest run --coverage.enabled --coverage.include=src",
     "release": "pnpm run build && pnpm changeset publish",
     "format": "prettier . --write",
-    "lint": "eslint . --report-unused-disable-directives --max-warnings 0"
+    "lint": "eslint . --max-warnings 0",
+    "typecheck": "tsc --noEmit"
   },
   "homepage": "https://github.com/Mathieu-COSYNS/qrcode-caption",
   "repository": {
@@ -39,16 +50,8 @@
     "underscore": "^1.13.6"
   },
   "devDependencies": {
-    "@babel/core": "^7.23.6",
-    "@babel/preset-env": "^7.23.6",
     "@changesets/cli": "^2.27.1",
     "@ianvs/prettier-plugin-sort-imports": "^4.1.1",
-    "@rollup/plugin-babel": "^6.0.4",
-    "@rollup/plugin-commonjs": "^25.0.7",
-    "@rollup/plugin-eslint": "^9.0.5",
-    "@rollup/plugin-node-resolve": "^15.2.3",
-    "@rollup/plugin-terser": "^0.4.4",
-    "@rollup/plugin-typescript": "^11.1.5",
     "@types/qrcode": "^1.5.5",
     "@types/underscore": "^1.11.15",
     "@typescript-eslint/eslint-plugin": "^6.14.0",
@@ -58,9 +61,8 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.0.1",
     "prettier": "^3.1.1",
-    "rollup": "^4.9.1",
-    "rollup-plugin-dts": "^6.1.0",
-    "tslib": "^2.6.2",
+    "terser": "^5.34.1",
+    "tsup": "^8.3.0",
     "typescript": "^5.3.3",
     "vitest": "^1.0.4"
   }
