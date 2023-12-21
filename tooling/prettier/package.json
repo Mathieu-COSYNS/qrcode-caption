@@ -1,0 +1,27 @@
+{
+  "name": "@acme/prettier-config",
+  "version": "0.0.0",
+  "private": true,
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "lint": "eslint . --max-warnings 0",
+    "clean": "rm -rf .turbo node_modules"
+  },
+  "dependencies": {
+    "@ianvs/prettier-plugin-sort-imports": "^4.1.1",
+    "prettier": "^3.1.1",
+    "prettier-plugin-astro": "^0.12.1",
+    "prettier-plugin-tailwindcss": "^0.5.6"
+  },
+  "devDependencies": {
+    "@acme/eslint-config": "0.0.0",
+    "eslint": "^8.56.0"
+  },
+  "eslintConfig": {
+    "root": true,
+    "extends": [
+      "@acme/eslint-config/base"
+    ]
+  }
+}

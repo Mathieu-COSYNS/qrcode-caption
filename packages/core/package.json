@@ -1,0 +1,70 @@
+{
+  "name": "qrcode-caption",
+  "description": "Wrapper around the qrcode lib to generate QR codes with a caption",
+  "version": "0.1.1",
+  "author": "Mathieu-COSYNS",
+  "keywords": [
+    "qr",
+    "code",
+    "canvas",
+    "qrcode",
+    "caption"
+  ],
+  "type": "module",
+  "module": "dist/bundle.esm.min.js",
+  "browser": "dist/bundle.umd.min.js",
+  "main": "dist/bundle.esm.min.js",
+  "types": "dist/qrcode-caption.d.ts",
+  "scripts": {
+    "dev": "rollup -c -w",
+    "build": "rollup -c",
+    "test": "vitest --watch=false",
+    "test:watch": "vitest",
+    "coverage": "vitest run --coverage.enabled --coverage.include=src",
+    "release": "pnpm run build && pnpm changeset publish",
+    "lint": "eslint . --max-warnings 0",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf .turbo node_modules"
+  },
+  "homepage": "https://github.com/Mathieu-COSYNS/qrcode-caption",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Mathieu-COSYNS/qrcode-caption"
+  },
+  "bugs": {
+    "url": "https://github.com/Mathieu-COSYNS/qrcode-caption/issues"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "mini-svg-data-uri": "^1.4.4",
+    "qrcode": "^1.5.3",
+    "underscore": "^1.13.6"
+  },
+  "devDependencies": {
+    "@acme/eslint-config": "0.0.0",
+    "@babel/core": "^7.23.6",
+    "@babel/preset-env": "^7.23.6",
+    "@changesets/cli": "^2.27.1",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-eslint": "^9.0.5",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^11.1.5",
+    "@types/qrcode": "^1.5.5",
+    "@types/underscore": "^1.11.15",
+    "@vitest/coverage-v8": "^1.0.4",
+    "eslint": "^8.56.0",
+    "rollup": "^4.9.1",
+    "rollup-plugin-dts": "^6.1.0",
+    "tslib": "^2.6.2",
+    "typescript": "^5.3.3",
+    "vitest": "^1.0.4"
+  },
+  "eslintConfig": {
+    "root": true,
+    "extends": [
+      "@acme/eslint-config/base"
+    ]
+  }
+}

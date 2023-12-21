@@ -1,3 +1,4 @@
+/* eslint-disable import/no-named-as-default */
 import babel from '@rollup/plugin-babel';
 import commonjs from '@rollup/plugin-commonjs';
 import eslint from '@rollup/plugin-eslint';
@@ -26,10 +27,10 @@ export default [
       resolve(),
       eslint({
         fix: true,
-        exclude: ['./node_modules/**', './src/styles/**'],
+        exclude: ['../../node_modules/**', './node_modules/**'],
       }),
       babel({
-        exclude: 'node_modules/**',
+        exclude: ['../../node_modules/**', './node_modules/**'],
         babelHelpers: 'bundled',
         babelrc: false,
         presets: [['@babel/preset-env']],
