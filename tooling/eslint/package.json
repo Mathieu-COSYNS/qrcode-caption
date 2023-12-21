@@ -1,0 +1,22 @@
+{
+  "name": "@acme/eslint-config",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "exports": {
+    "./base": "./base.js"
+  },
+  "scripts": {
+    "clean": "git clean -xdf .cache .turbo node_modules"
+  },
+  "dependencies": {
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "eslint-plugin-turbo": "^2.3.1",
+    "typescript-eslint": "^8.15.0"
+  },
+  "devDependencies": {
+    "@types/eslint__js": "^8.42.3",
+    "eslint": "^9.15.0"
+  }
+}

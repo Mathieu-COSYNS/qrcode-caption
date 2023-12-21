@@ -1,9 +1,10 @@
 import svgToMiniDataURI from 'mini-svg-data-uri';
+import type { QRCode } from 'qrcode';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { create } from 'qrcode/lib/core/qrcode';
 
-import { type QRCodeSvgRendererOptions } from './QRCodeSvgRendererOptions';
+import type { QRCodeSvgRendererOptions } from './QRCodeSvgRendererOptions';
 import { render } from './SvgRenderer';
 
 export { type Percentage } from './Percentage';
@@ -31,7 +32,8 @@ export function toSVG(text: string, options?: QRCodeOptions): string;
 
 export function toSVG(text: string, captionOrOptions?: string | QRCodeOptions, opts?: QRCodeOptions) {
   const { caption, options } = getCaptionAndOptions(captionOrOptions, opts);
-  const data = create(text, options);
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
+  const data: QRCode = create(text, options);
 
   return render(data, caption, options);
 }

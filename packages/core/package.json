@@ -1,0 +1,64 @@
+{
+  "name": "qrcode-caption",
+  "description": "Wrapper around the qrcode lib to generate QR codes with a caption",
+  "version": "0.2.0",
+  "author": "Mathieu-COSYNS",
+  "keywords": [
+    "qr",
+    "code",
+    "canvas",
+    "qrcode",
+    "caption"
+  ],
+  "homepage": "https://github.com/Mathieu-COSYNS/qrcode-caption",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Mathieu-COSYNS/qrcode-caption"
+  },
+  "bugs": {
+    "url": "https://github.com/Mathieu-COSYNS/qrcode-caption/issues"
+  },
+  "license": "MIT",
+  "files": [
+    "dist/*"
+  ],
+  "type": "module",
+  "sideEffects": false,
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "dev": "tsup --watch",
+    "build": "tsup",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "coverage": "vitest run --coverage.enabled --coverage.include=src",
+    "release": "pnpm run build && pnpm changeset publish",
+    "lint": "eslint . --max-warnings 0",
+    "typecheck": "tsc --noEmit",
+    "clean": "git clean -xdf .turbo node_modules dist"
+  },
+  "dependencies": {
+    "mini-svg-data-uri": "^1.4.4",
+    "qrcode": "^1.5.4",
+    "underscore": "^1.13.7"
+  },
+  "devDependencies": {
+    "@acme/eslint-config": "workspace:*",
+    "@types/qrcode": "^1.5.5",
+    "@types/underscore": "^1.13.0",
+    "@vitest/coverage-v8": "^2.1.5",
+    "eslint": "^9.15.0",
+    "terser": "^5.36.0",
+    "tsup": "^8.3.5",
+    "typescript": "~5.6.3",
+    "vitest": "^2.1.5"
+  }
+}

@@ -1,19 +1,19 @@
-import { type QRCode } from 'qrcode';
+import type { QRCode } from 'qrcode';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { getOptions as getLibOptions } from 'qrcode/lib/renderer/utils';
 import { escape } from 'underscore';
 
-import { type Percentage } from './Percentage';
-import { type QRCodeSvgRendererOptions } from './QRCodeSvgRendererOptions';
+import type { Percentage } from './Percentage';
+import type { QRCodeSvgRendererOptions } from './QRCodeSvgRendererOptions';
 
-type Color = {
+interface Color {
   r: number;
   g: number;
   b: number;
   a: number;
   hex: `#${number}`;
-};
+}
 
 function parseNumber<T>(value: unknown, defaultValue: T, options: { min?: number; max?: number }) {
   if (value === null || value === undefined) return defaultValue;
@@ -32,14 +32,15 @@ function parsePercentageOrNumber(value: Percentage | number | undefined, size: n
 }
 
 function getOptions(options: QRCodeSvgRendererOptions | undefined, size: number) {
-  if (options?.['aria-label'] && options?.['aria-hidden'])
+  if (options?.['aria-label'] && options['aria-hidden'])
     throw new Error('Both aria-label and aria-hidden can not be set');
-  if (options?.['aria-labelledby'] && options?.['aria-hidden'])
+  if (options?.['aria-labelledby'] && options['aria-hidden'])
     throw new Error('Both aria-labelledby and aria-hidden can not be set');
   return {
     width: parseNumber(options?.width, undefined, { min: 1 }),
     scale: parseNumber(options?.scale, 4, { min: 1 }),
     margin: parsePercentageOrNumber(options?.margin, size, 4),
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
     color: getLibOptions(options).color as { light: Color; dark: Color },
     fontSize: parsePercentageOrNumber(options?.fontSize, size, 4),
     'aria-label': options?.['aria-label'] ? escape(options['aria-label']) : undefined,

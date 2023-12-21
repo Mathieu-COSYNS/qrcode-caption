@@ -152,7 +152,7 @@ it.each([
   { text: 'new', options: { width: -1 }, snapshot: 1 },
 ])(
   'should render SVG $snapshot',
-  ({
+  async ({
     text,
     caption,
     options,
@@ -164,15 +164,15 @@ it.each([
     snapshot: number;
   }) => {
     const svg = toSVG(text, caption, options);
-    expect(svg).toMatchFileSnapshot(`__snapshots__/${snapshot}.svg`);
+    await expect(svg).toMatchFileSnapshot(`__snapshots__/${snapshot}.svg`);
     const dataUrl = toDataURL(text, caption, options);
-    expect(dataUrl).toMatchFileSnapshot(`__snapshots__/${snapshot}.txt`);
+    await expect(dataUrl).toMatchFileSnapshot(`__snapshots__/${snapshot}.txt`);
 
     if (typeof caption === 'undefined') {
       const svg = toSVG(text, options);
-      expect(svg).toMatchFileSnapshot(`__snapshots__/${snapshot}.svg`);
+      await expect(svg).toMatchFileSnapshot(`__snapshots__/${snapshot}.svg`);
       const dataUrl = toDataURL(text, options);
-      expect(dataUrl).toMatchFileSnapshot(`__snapshots__/${snapshot}.txt`);
+      await expect(dataUrl).toMatchFileSnapshot(`__snapshots__/${snapshot}.txt`);
     }
   },
 );
