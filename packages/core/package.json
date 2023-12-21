@@ -10,21 +10,31 @@
     "qrcode",
     "caption"
   ],
+  "files": [
+    "dist/*"
+  ],
   "type": "module",
-  "module": "dist/bundle.esm.min.js",
-  "browser": "dist/bundle.umd.min.js",
-  "main": "dist/bundle.esm.min.js",
-  "types": "dist/qrcode-caption.d.ts",
+  "sideEffects": false,
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "scripts": {
-    "dev": "rollup -c -w",
-    "build": "rollup -c",
+    "dev": "tsup --watch",
+    "build": "tsup && rollup -c",
     "test": "vitest --watch=false",
     "test:watch": "vitest",
     "coverage": "vitest run --coverage.enabled --coverage.include=src",
     "release": "pnpm run build && pnpm changeset publish",
     "lint": "eslint . --max-warnings 0",
     "typecheck": "tsc --noEmit",
-    "clean": "rm -rf .turbo node_modules"
+    "clean": "rm -rf .turbo node_modules dist coverage"
   },
   "homepage": "https://github.com/Mathieu-COSYNS/qrcode-caption",
   "repository": {
@@ -46,7 +56,6 @@
     "@babel/preset-env": "^7.23.6",
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-commonjs": "^25.0.7",
-    "@rollup/plugin-eslint": "^9.0.5",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^11.1.5",
@@ -55,8 +64,8 @@
     "@vitest/coverage-v8": "^1.0.4",
     "eslint": "^8.56.0",
     "rollup": "^4.9.1",
-    "rollup-plugin-dts": "^6.1.0",
     "tslib": "^2.6.2",
+    "tsup": "^8.0.1",
     "typescript": "^5.3.3",
     "vitest": "^1.0.4"
   },
@@ -65,5 +74,17 @@
     "extends": [
       "@acme/eslint-config/base"
     ]
+  },
+  "tsup": {
+    "entry": [
+      "src/index.ts"
+    ],
+    "format": [
+      "cjs",
+      "esm"
+    ],
+    "clean": true,
+    "dts": true,
+    "minify": false
   }
 }

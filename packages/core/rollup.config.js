@@ -1,34 +1,24 @@
 /* eslint-disable import/no-named-as-default */
 import babel from '@rollup/plugin-babel';
 import commonjs from '@rollup/plugin-commonjs';
-import eslint from '@rollup/plugin-eslint';
 import resolve from '@rollup/plugin-node-resolve';
 import terser from '@rollup/plugin-terser';
 import typescript from '@rollup/plugin-typescript';
-import { dts } from 'rollup-plugin-dts';
 
 export default [
   {
     input: 'src/index.ts',
     output: [
       {
-        file: 'dist/bundle.umd.min.js',
-        format: 'umd',
+        file: 'dist/bundle.min.js',
+        format: 'iife',
         name: 'QRCodeCaption',
-      },
-      {
-        file: 'dist/bundle.esm.min.js',
-        format: 'es',
       },
     ],
     plugins: [
       typescript(),
       commonjs(),
       resolve(),
-      eslint({
-        fix: true,
-        exclude: ['../../node_modules/**', './node_modules/**'],
-      }),
       babel({
         exclude: ['../../node_modules/**', './node_modules/**'],
         babelHelpers: 'bundled',
@@ -45,10 +35,5 @@ export default [
       }
       warner(warning);
     },
-  },
-  {
-    input: 'src/index.ts',
-    output: [{ file: 'dist/qrcode-caption.d.ts', format: 'es' }],
-    plugins: [dts()],
   },
 ];
