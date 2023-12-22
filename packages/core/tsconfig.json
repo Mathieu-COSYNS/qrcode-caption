@@ -1,15 +1,17 @@
 {
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "@acme/typescript-config/base",
   "compilerOptions": {
-    "target": "es2020",
+    "incremental": false,
+    "allowImportingTsExtensions": false,
+    "declaration": false,
+    "declarationMap": false,
+    "verbatimModuleSyntax": false,
+
     "module": "ESNext",
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
     "moduleResolution": "bundler",
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
-    "strict": true,
-    "skipLibCheck": true,
+
+    "target": "es2020",
     "typeRoots": ["node_modules/@types"]
   }
 }

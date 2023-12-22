@@ -52,6 +52,7 @@
   },
   "devDependencies": {
     "@acme/eslint-config": "0.0.0",
+    "@acme/typescript-config": "^0.0.0",
     "@babel/core": "^7.23.6",
     "@babel/preset-env": "^7.23.6",
     "@rollup/plugin-babel": "^6.0.4",
