@@ -143,13 +143,8 @@ it.each([
   { text: 'new', caption: 'caption', options: { margin: '10' as unknown as number }, snapshot: 32 },
   { text: 'new', caption: 'caption', options: { fontSize: '14' as unknown as number }, snapshot: 33 },
   { text: 'new', caption: '@&/\\#€<>\'"', snapshot: 34 },
-  { text: 'new', options: { margin: 'x' as unknown as number }, snapshot: 1 },
-  { text: 'new', options: { width: 'x' as unknown as number }, snapshot: 1 },
-  { text: 'new', options: { scale: 'x' as unknown as number }, snapshot: 1 },
-  { text: 'new', options: { fontSize: 'x' as unknown as number }, snapshot: 1 },
   { text: 'new', options: { 'aria-hidden': 'x' as unknown as boolean }, snapshot: 1 },
   { text: 'new', options: { 'aria-hidden': 'true' as unknown as boolean }, snapshot: 1 },
-  { text: 'new', options: { width: -1 }, snapshot: 1 },
 ])(
   'should render SVG $snapshot',
   async ({
@@ -178,6 +173,11 @@ it.each([
 );
 
 it.each([
+  { text: 'new', options: { width: -1 }, error: '-1 is below the minium allowed (1)' },
+  { text: 'new', options: { margin: 'x' as unknown as number }, error: 'Can not convert x to number' },
+  { text: 'new', options: { width: 'x' as unknown as number }, error: 'Can not convert x to number' },
+  { text: 'new', options: { scale: 'x' as unknown as number }, error: 'Can not convert x to number' },
+  { text: 'new', options: { fontSize: 'x' as unknown as number }, error: 'Can not convert x to number' },
   {
     text: 'new',
     options: { 'aria-hidden': true, 'aria-label': 'QR Code new' },

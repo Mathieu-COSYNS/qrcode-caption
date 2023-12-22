@@ -1,35 +1,8 @@
 import type { QRCode } from 'qrcode';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import { getOptions as getLibOptions } from 'qrcode/lib/renderer/utils';
 import { escape } from 'underscore';
 
-import type { Percentage } from './Percentage';
 import type { QRCodeSvgRendererOptions } from './QRCodeSvgRendererOptions';
-
-interface Color {
-  r: number;
-  g: number;
-  b: number;
-  a: number;
-  hex: `#${number}`;
-}
-
-function parseNumber<T>(value: unknown, defaultValue: T, options: { min?: number; max?: number }) {
-  if (value === null || value === undefined) return defaultValue;
-  const result = Number(value);
-  if (isNaN(result)) return defaultValue;
-  if (options.min && result < options.min) return defaultValue;
-  if (options.max && result > options.max) return defaultValue;
-  return result;
-}
-
-function parsePercentageOrNumber(value: Percentage | number | undefined, size: number, defaultValue: number) {
-  if (typeof value === 'string' && value.endsWith('%')) {
-    return size * (Number(value.slice(0, -1)) / 100);
-  }
-  return parseNumber(value, defaultValue, { min: 0 });
-}
+import { BLACK, checkNumber, colorToHex, parseHexColorString, parsePercentage, WHITE, type Color } from './utils';
 
 function getOptions(options: QRCodeSvgRendererOptions | undefined, size: number) {
   if (options?.['aria-label'] && options['aria-hidden'])
@@ -37,12 +10,14 @@ function getOptions(options: QRCodeSvgRendererOptions | undefined, size: number)
   if (options?.['aria-labelledby'] && options['aria-hidden'])
     throw new Error('Both aria-labelledby and aria-hidden can not be set');
   return {
-    width: parseNumber(options?.width, undefined, { min: 1 }),
-    scale: parseNumber(options?.scale, 4, { min: 1 }),
-    margin: parsePercentageOrNumber(options?.margin, size, 4),
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
-    color: getLibOptions(options).color as { light: Color; dark: Color },
-    fontSize: parsePercentageOrNumber(options?.fontSize, size, 4),
+    width: checkNumber(options?.width, null, { min: 1 }),
+    scale: checkNumber(options?.scale, 4, { min: 1 }),
+    margin: checkNumber(parsePercentage(options?.margin, size), 4, { min: 0 }),
+    color: {
+      foreground: parseHexColorString(options?.color?.dark, BLACK),
+      background: parseHexColorString(options?.color?.light, WHITE),
+    },
+    fontSize: checkNumber(parsePercentage(options?.fontSize, size), 4, { min: 0 }),
     'aria-label': options?.['aria-label'] ? escape(options['aria-label']) : undefined,
     'aria-labelledby': options?.['aria-labelledby'] ? escape(options['aria-labelledby']) : undefined,
     'aria-hidden': options?.['aria-hidden'] === true,
@@ -51,7 +26,7 @@ function getOptions(options: QRCodeSvgRendererOptions | undefined, size: number)
 
 function getColorAttrib(color: Color, attrib: string) {
   const alpha = color.a / 255;
-  const str = `${attrib}="${color.hex}"`;
+  const str = `${attrib}="${colorToHex(color)}"`;
 
   return str + (alpha < 1 ? ` ${attrib}-opacity="${alpha.toFixed(2).slice(1)}"` : '');
 }
@@ -100,18 +75,18 @@ export function render(qrData: QRCode, caption?: string, options?: QRCodeSvgRend
   const captionEstimatedBaseline = captionHeight * (3 / 4);
   const qrcodeHeight = qrcodeWidth + (caption ? captionHeight : 0);
 
-  const bg = !opts.color.light.a
+  const bg = !opts.color.background.a
     ? ''
-    : `<rect ${getColorAttrib(opts.color.light, 'fill')} width="${qrcodeWidth}" height="${qrcodeHeight}"/>`;
+    : `<rect ${getColorAttrib(opts.color.background, 'fill')} width="${qrcodeWidth}" height="${qrcodeHeight}"/>`;
 
-  const fg = `<path ${getColorAttrib(opts.color.dark, 'stroke')} d="${qrToPath(data, size, opts.margin)}"/>`;
+  const fg = `<path ${getColorAttrib(opts.color.foreground, 'stroke')} d="${qrToPath(data, size, opts.margin)}"/>`;
 
   const text = caption
     ? `<text y="${
         qrcodeWidth - opts.margin / 2 + captionEstimatedBaseline
       }" x="50%" text-anchor="middle" font-family="Verdana, 'Bitstream Vera Sans', 'DejaVu Sans', Tahoma, Geneva, Arial, Sans-serif" font-size="${
         opts.fontSize
-      }" ${getColorAttrib(opts.color.dark, 'fill')}>${escape(caption)}</text>`
+      }" ${getColorAttrib(opts.color.foreground, 'fill')}>${escape(caption)}</text>`
     : '';
 
   const width = !opts.width ? qrcodeWidth * opts.scale : opts.width;
