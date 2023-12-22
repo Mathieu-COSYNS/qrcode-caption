@@ -15,6 +15,11 @@ module.exports = {
     project: true,
   },
   rules: {
+    '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
+    '@typescript-eslint/consistent-type-imports': [
+      'error',
+      { prefer: 'type-imports', fixStyle: 'inline-type-imports' },
+    ],
     'import/consistent-type-specifier-style': ['error', 'prefer-inline'],
   },
   ignorePatterns: ['dist', '.eslintrc.cjs'],
