@@ -2,7 +2,7 @@ import { type QRCode } from 'qrcode';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { getOptions as getLibOptions } from 'qrcode/lib/renderer/utils';
-import { escape } from 'underscore';
+import escape from 'underscore/modules/escape.js';
 
 import { type Percentage } from './Percentage';
 import { type QRCodeSvgRendererOptions } from './QRCodeSvgRendererOptions';
