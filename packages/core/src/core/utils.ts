@@ -49,9 +49,6 @@ type NumericRange<
   ? acc | start | end
   : NumericRange<start, end, [...arr, 1], arr[start] extends undefined ? acc : acc | arr['length']>;
 
-export type HexColor = `#${string}`;
-export type HexaColor = `#${string}`;
-
 export interface Color {
   r: NumericRange<0, 255>;
   g: NumericRange<0, 255>;
@@ -106,6 +103,12 @@ export function colorToHex(color: Color, transparency = false) {
   rgbStrMap = rgbStrMap.map((v) => (v.length === 1 ? `0${v}` : v));
 
   const hexStr = `#${rgbStrMap.join('')}`;
+
+  const shortRgbStrMap = rgbStrMap.map((v) => v[0]!);
+
+  if (`#${shortRgbStrMap.map((v) => v + v).join('')}` === hexStr) {
+    return `#${shortRgbStrMap.join('')}`;
+  }
 
   return hexStr;
 }
