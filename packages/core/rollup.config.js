@@ -5,6 +5,7 @@ import resolve from '@rollup/plugin-node-resolve';
 import terser from '@rollup/plugin-terser';
 import typescript from '@rollup/plugin-typescript';
 
+/** @type {import('rollup').RollupOptions[]} */
 export default [
   {
     input: 'src/index.ts',
@@ -29,7 +30,8 @@ export default [
     ],
     onwarn: function (warning, warner) {
       if (warning.code === 'CIRCULAR_DEPENDENCY') {
-        if (warning.importer && warning.importer.startsWith('node_modules/')) {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+        if (warning.importer?.startsWith('node_modules/')) {
           return;
         }
       }
