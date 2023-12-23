@@ -30,6 +30,37 @@ importers:
         specifier: ^5.3.3
         version: 5.3.3
 
+  apps/node-cjs:
+    dependencies:
+      qrcode-caption:
+        specifier: '*'
+        version: link:../../packages/core
+
+  apps/node-esm:
+    dependencies:
+      qrcode-caption:
+        specifier: '*'
+        version: link:../../packages/core
+
+  apps/vite:
+    dependencies:
+      qrcode-caption:
+        specifier: '*'
+        version: link:../../packages/core
+    devDependencies:
+      '@acme/eslint-config':
+        specifier: 0.0.0
+        version: link:../../tooling/eslint
+      eslint:
+        specifier: ^8.56.0
+        version: 8.56.0
+      typescript:
+        specifier: ^5.3.3
+        version: 5.3.3
+      vite:
+        specifier: ^5.0.8
+        version: 5.0.10
+
   packages/core:
     dependencies:
       mini-svg-data-uri:
