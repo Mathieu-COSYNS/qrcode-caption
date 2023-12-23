@@ -11,7 +11,9 @@
     },
     "test": {},
     "test:watch": {},
-    "lint": {},
+    "lint": {
+      "dependsOn": ["build"]
+    },
     "typecheck": {
       "outputs": ["node_modules/.cache/tsbuildinfo.json"]
     },

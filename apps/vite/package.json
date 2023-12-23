@@ -11,7 +11,7 @@
     "clean": "rm -rf .turbo node_modules dist"
   },
   "dependencies": {
-    "qrcode-caption": "*"
+    "qrcode-caption": "^0.1.1"
   },
   "devDependencies": {
     "@acme/eslint-config": "0.0.0",
