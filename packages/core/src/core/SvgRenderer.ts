@@ -1,8 +1,16 @@
 import type { QRCode } from "qrcode";
-import { escape } from "underscore";
 
 import type { QRCodeSvgRendererOptions } from "./QRCodeSvgRendererOptions";
-import { BLACK, checkNumber, colorToHex, parseHexColorString, parsePercentage, WHITE, type Color } from "./utils";
+import {
+  BLACK,
+  checkNumber,
+  colorToHex,
+  escape,
+  parseHexColorString,
+  parsePercentage,
+  WHITE,
+  type Color,
+} from "./utils";
 
 function getOptions(options: QRCodeSvgRendererOptions | undefined, size: number) {
   if (options?.["aria-label"] && options["aria-hidden"])

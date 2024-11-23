@@ -112,3 +112,18 @@ export function colorToHex(color: Color, transparency = false) {
 
   return hexStr;
 }
+
+export function escape(string: string) {
+  const entityMap = {
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#x27;",
+    "`": "&#x60;",
+  };
+
+  return String(string).replace(/[&<>"'`]/g, (s) => {
+    return entityMap[s as "&" | "<" | ">" | '"' | "'" | "`"];
+  });
+}

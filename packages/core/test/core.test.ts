@@ -142,7 +142,7 @@ it.each([
   { text: "new", caption: "caption", options: { color: { dark: "#0000007f" } }, snapshot: 31 },
   { text: "new", caption: "caption", options: { margin: "10" as unknown as number }, snapshot: 32 },
   { text: "new", caption: "caption", options: { fontSize: "14" as unknown as number }, snapshot: 33 },
-  { text: "new", caption: "@&/\\#€<>'\"", snapshot: 34 },
+  { text: "new", caption: "@&/\\#€<>'\"`", snapshot: 34 },
   { text: "new", options: { "aria-hidden": "x" as unknown as boolean }, snapshot: 1 },
   { text: "new", options: { "aria-hidden": "true" as unknown as boolean }, snapshot: 1 },
 ])(

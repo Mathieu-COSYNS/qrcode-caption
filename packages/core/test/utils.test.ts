@@ -1,6 +1,6 @@
 import { expect, it } from "vitest";
 
-import { colorToHex, parseHexColorString } from "../src/core/utils";
+import { colorToHex, escape, parseHexColorString } from "../src/core/utils";
 
 it.each([
   {
@@ -55,5 +55,37 @@ it.each([
     if (color) {
       expect(colorToHex(color, transparent)).toBe(expected);
     }
+  },
+);
+
+it.each([
+  {
+    input: "&",
+    expected: "&amp;",
+  },
+  {
+    input: "<",
+    expected: "&lt;",
+  },
+  {
+    input: ">",
+    expected: "&gt;",
+  },
+  {
+    input: '"',
+    expected: "&quot;",
+  },
+  {
+    input: "'",
+    expected: "&#x27;",
+  },
+  {
+    input: "`",
+    expected: "&#x60;",
+  },
+] as const)(
+  "should return an html representation of $input",
+  ({ input, expected }: { input: string; expected: string }) => {
+    expect(escape(input)).toBe(expected);
   },
 );

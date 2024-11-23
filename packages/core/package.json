@@ -47,8 +47,7 @@
   },
   "dependencies": {
     "mini-svg-data-uri": "^1.4.4",
-    "qrcode": "^1.5.4",
-    "underscore": "^1.13.7"
+    "qrcode": "^1.5.4"
   },
   "devDependencies": {
     "@acme/eslint-config": "workspace:*",
