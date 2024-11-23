@@ -1,3 +1,3 @@
-import { toSVG } from 'qrcode-caption';
+import { toSVG } from "qrcode-caption";
 
-console.log(toSVG('qrcode data here'));
+console.log(toSVG("qrcode data here"));

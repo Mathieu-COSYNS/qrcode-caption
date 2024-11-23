@@ -1,18 +1,18 @@
-import svgToMiniDataURI from 'mini-svg-data-uri';
-import type { QRCode } from 'qrcode';
+import svgToMiniDataURI from "mini-svg-data-uri";
+import type { QRCode } from "qrcode";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-import { create } from 'qrcode/lib/core/qrcode';
+import { create } from "qrcode/lib/core/qrcode";
 
-import type { QRCodeSvgRendererOptions } from './QRCodeSvgRendererOptions';
-import { render } from './SvgRenderer';
+import type { QRCodeSvgRendererOptions } from "./QRCodeSvgRendererOptions";
+import { render } from "./SvgRenderer";
 
-export { type Percentage } from './Percentage';
+export { type Percentage } from "./Percentage";
 
 export type QRCodeOptions = QRCodeSvgRendererOptions;
 
 function getCaptionAndOptions(captionOrOptions?: string | QRCodeOptions, opts?: QRCodeOptions) {
-  if (captionOrOptions && typeof captionOrOptions === 'object')
+  if (captionOrOptions && typeof captionOrOptions === "object")
     return {
       caption: undefined,
       options: captionOrOptions,
@@ -53,6 +53,6 @@ export function toDataURL(text: string, captionOrOptions?: string | QRCodeOption
   const svg = toSVG(text, caption, options);
 
   return svgToMiniDataURI(svg)
-    .replace(/font-family='/, 'font-family=%22')
-    .replace(/serif'/, 'serif%22');
+    .replace(/font-family='/, "font-family=%22")
+    .replace(/serif'/, "serif%22");
 }

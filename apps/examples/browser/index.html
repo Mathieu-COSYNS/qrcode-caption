@@ -14,7 +14,7 @@
       <h2>Example 1</h2>
       <pre><code id="example1"></code></pre>
       <script type="text/javascript">
-        document.getElementById('example1').textContent = QRCodeCaption.toSVG('https://example.com', 'Example 1', {
+        document.getElementById("example1").textContent = QRCodeCaption.toSVG("https://example.com", "Example 1", {
           width: 100,
         });
       </script>
@@ -24,7 +24,7 @@
       <h2>Example 2</h2>
       <div id="example2"></div>
       <script type="text/javascript">
-        document.getElementById('example2').innerHTML = QRCodeCaption.toSVG('https://example.com', 'Example 2', {
+        document.getElementById("example2").innerHTML = QRCodeCaption.toSVG("https://example.com", "Example 2", {
           width: 100,
         });
       </script>
@@ -34,7 +34,7 @@
       <h2>Example 3</h2>
       <img id="example3" alt="example" />
       <script type="text/javascript">
-        document.getElementById('example3').src = QRCodeCaption.toDataURL('https://example.com', 'Example 3', {
+        document.getElementById("example3").src = QRCodeCaption.toDataURL("https://example.com", "Example 3", {
           width: 100,
         });
       </script>
@@ -45,9 +45,9 @@
       <img id="example4" alt="example" />
       <script type="text/javascript">
         async function example4() {
-          const result = QRCodeCaption.toDataURL('https://example.com', 'Example 4', { width: 100 });
-          const png = await QRCodeCaption.convertDataURLType(result, 'image/png');
-          document.getElementById('example4').src = png;
+          const result = QRCodeCaption.toDataURL("https://example.com", "Example 4", { width: 100 });
+          const png = await QRCodeCaption.convertDataURLType(result, "image/png");
+          document.getElementById("example4").src = png;
         }
 
         example4();
@@ -59,12 +59,12 @@
       <button id="example5">Download as PNG</button>
       <script type="text/javascript">
         async function example5() {
-          const result = QRCodeCaption.toDataURL('https://example.com', 'Example 5', { width: 100 });
-          const png = await QRCodeCaption.convertDataURLType(result, 'image/png');
-          QRCodeCaption.downloadDataURL(png, 'Example5.png');
+          const result = QRCodeCaption.toDataURL("https://example.com", "Example 5", { width: 100 });
+          const png = await QRCodeCaption.convertDataURLType(result, "image/png");
+          QRCodeCaption.downloadDataURL(png, "Example5.png");
         }
 
-        document.getElementById('example5').addEventListener('click', example5);
+        document.getElementById("example5").addEventListener("click", example5);
       </script>
     </section>
 
@@ -73,16 +73,16 @@
       <img id="example6-img" alt="example" />
       <button id="example6-btn">Download as PNG</button>
       <script type="text/javascript">
-        document.getElementById('example6-img').src = QRCodeCaption.toDataURL('https://example.com', 'Example 6', {
+        document.getElementById("example6-img").src = QRCodeCaption.toDataURL("https://example.com", "Example 6", {
           width: 100,
         });
 
         async function example6_onclick() {
-          const png = await QRCodeCaption.convertDataURLType(document.getElementById('example6-img').src, 'image/png');
-          QRCodeCaption.downloadDataURL(png, 'Example6.png');
+          const png = await QRCodeCaption.convertDataURLType(document.getElementById("example6-img").src, "image/png");
+          QRCodeCaption.downloadDataURL(png, "Example6.png");
         }
 
-        document.getElementById('example6-btn').addEventListener('click', example6_onclick);
+        document.getElementById("example6-btn").addEventListener("click", example6_onclick);
       </script>
     </section>
   </body>

@@ -29,7 +29,7 @@ export function checkNumber<T>(value: unknown, nullishValue: T, options?: CheckN
 }
 
 export function parsePercentage<T>(value: T, size: number) {
-  if (typeof value === 'string' && value.endsWith('%')) {
+  if (typeof value === "string" && value.endsWith("%")) {
     try {
       const nb = checkNumber(value.slice(0, -1), 0);
       return size * (nb / 100);
@@ -45,9 +45,9 @@ type NumericRange<
   end extends number,
   arr extends unknown[] = [],
   acc extends number = never,
-> = arr['length'] extends end
+> = arr["length"] extends end
   ? acc | start | end
-  : NumericRange<start, end, [...arr, 1], arr[start] extends undefined ? acc : acc | arr['length']>;
+  : NumericRange<start, end, [...arr, 1], arr[start] extends undefined ? acc : acc | arr["length"]>;
 
 export interface Color {
   r: NumericRange<0, 255>;
@@ -64,7 +64,7 @@ export function parseHexColorString<T>(value: unknown, nullishValue: T) {
     return nullishValue;
   }
 
-  if (typeof value !== 'string') {
+  if (typeof value !== "string") {
     throw Error(`Can not convert ${value} to Color. (should be defined as hex string)`);
   }
 
@@ -78,7 +78,7 @@ export function parseHexColorString<T>(value: unknown, nullishValue: T) {
 
   // Convert from short to long form (fff -> ffffff)
   if (hexCode.length <= 4) {
-    hexCode = hexCode.replace(/./g, '$&$&');
+    hexCode = hexCode.replace(/./g, "$&$&");
   }
 
   // Add default alpha value
@@ -102,12 +102,12 @@ export function colorToHex(color: Color, transparency = false) {
 
   rgbStrMap = rgbStrMap.map((v) => (v.length === 1 ? `0${v}` : v));
 
-  const hexStr = `#${rgbStrMap.join('')}`;
+  const hexStr = `#${rgbStrMap.join("")}`;
 
-  const shortRgbStrMap = rgbStrMap.map((v) => v[0]!);
+  const shortRgbStrMap = rgbStrMap.map((v) => v[0]);
 
-  if (`#${shortRgbStrMap.map((v) => v + v).join('')}` === hexStr) {
-    return `#${shortRgbStrMap.join('')}`;
+  if (`#${shortRgbStrMap.map((v) => v + v).join("")}` === hexStr) {
+    return `#${shortRgbStrMap.join("")}`;
   }
 
   return hexStr;

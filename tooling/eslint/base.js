@@ -1,18 +1,18 @@
-import eslint from '@eslint/js';
-import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
-import turboPlugin from 'eslint-plugin-turbo';
-import tseslint from 'typescript-eslint';
+import eslint from "@eslint/js";
+import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended";
+import turboPlugin from "eslint-plugin-turbo";
+import tseslint from "typescript-eslint";
 
 export default tseslint.config(
   // Files checked
   {
     ignores: [
-      'dist',
-      'eslint.config.mjs',
-      'postcss.config.js',
-      'prettier.config.mjs',
-      'tailwind.config.mjs',
-      'vite.config.ts',
+      "dist",
+      "eslint.config.mjs",
+      "postcss.config.js",
+      "prettier.config.mjs",
+      "tailwind.config.mjs",
+      "vite.config.ts",
     ],
   },
   {
@@ -27,15 +27,15 @@ export default tseslint.config(
     ],
     rules: {
       ...turboPlugin.configs.recommended.rules,
-      '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
-      '@typescript-eslint/consistent-type-imports': [
-        'error',
-        { prefer: 'type-imports', fixStyle: 'inline-type-imports' },
+      "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_", varsIgnorePattern: "^_" }],
+      "@typescript-eslint/consistent-type-imports": [
+        "error",
+        { prefer: "type-imports", fixStyle: "inline-type-imports" },
       ],
-      '@typescript-eslint/no-import-type-side-effects': 'error',
-      '@typescript-eslint/no-misused-promises': ['error', { checksVoidReturn: { attributes: false } }],
-      '@typescript-eslint/restrict-template-expressions': [
-        'error',
+      "@typescript-eslint/no-import-type-side-effects": "error",
+      "@typescript-eslint/no-misused-promises": ["error", { checksVoidReturn: { attributes: false } }],
+      "@typescript-eslint/restrict-template-expressions": [
+        "error",
         {
           allowBoolean: true,
           allowNumber: true,

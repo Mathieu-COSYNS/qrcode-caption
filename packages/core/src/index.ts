@@ -1,2 +1,2 @@
-export * from './core';
-export * from './browserUtils';
+export * from "./core";
+export * from "./browserUtils";

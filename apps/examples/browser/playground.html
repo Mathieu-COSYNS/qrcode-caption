@@ -89,7 +89,7 @@
     </main>
     <script>
       function generateQRCode() {
-        const form = document.querySelector('#qr-form');
+        const form = document.querySelector("#qr-form");
         const formData = Object.fromEntries(new FormData(form));
 
         const data = formData.data;
@@ -97,58 +97,58 @@
         const options = {
           version: formData.version,
           errorCorrectionLevel: formData.errorCorrectionLevel,
-          maskPattern: formData.maskPattern !== 'undefined' ? formData.maskPattern : undefined,
+          maskPattern: formData.maskPattern !== "undefined" ? formData.maskPattern : undefined,
           color: {
-            dark: formData['color.dark'],
-            light: formData['color.light'],
+            dark: formData["color.dark"],
+            light: formData["color.light"],
           },
           margin: formData.margin || undefined,
           scale: formData.scale || undefined,
           width: formData.width || undefined,
           fontSize: formData.fontSize || undefined,
-          'aria-label': formData['aria-label'] || undefined,
-          'aria-labelledby': formData['aria-labelledby'] || undefined,
-          'aria-hidden': formData['aria-hidden'] !== 'undefined' ? formData['aria-hidden'] === 'true' : undefined,
+          "aria-label": formData["aria-label"] || undefined,
+          "aria-labelledby": formData["aria-labelledby"] || undefined,
+          "aria-hidden": formData["aria-hidden"] !== "undefined" ? formData["aria-hidden"] === "true" : undefined,
         };
 
-        const opt = document.querySelector('#qr-options');
+        const opt = document.querySelector("#qr-options");
         opt.textContent = JSON.stringify(options, undefined, 2);
 
-        const img = document.querySelector('#qr-preview img');
-        const btn = document.querySelector('#qr-preview button');
-        const pre = document.querySelector('#qr-preview pre');
+        const img = document.querySelector("#qr-preview img");
+        const btn = document.querySelector("#qr-preview button");
+        const pre = document.querySelector("#qr-preview pre");
 
         try {
           img.src = QRCodeCaption.toDataURL(data, caption, options);
-          img.style.display = 'block';
-          btn.style.display = 'block';
-          pre.style.display = 'none';
+          img.style.display = "block";
+          btn.style.display = "block";
+          pre.style.display = "none";
         } catch (e) {
           console.error(e);
-          img.style.display = 'none';
-          btn.style.display = 'none';
-          pre.style.display = 'block';
+          img.style.display = "none";
+          btn.style.display = "none";
+          pre.style.display = "block";
           pre.textContent = e;
         }
       }
 
-      const inputs = document.querySelectorAll('#qr-form input, #qr-form select, #qr-form textarea');
+      const inputs = document.querySelectorAll("#qr-form input, #qr-form select, #qr-form textarea");
       for (const input of inputs) {
-        input.addEventListener('input', function () {
+        input.addEventListener("input", function () {
           if (this.checkValidity()) {
             generateQRCode();
           } else {
-            console.error('invalid input');
+            console.error("invalid input");
           }
         });
       }
 
       async function download() {
-        const png = await QRCodeCaption.convertDataURLType(document.querySelector('#qr-preview img').src, 'image/png');
-        QRCodeCaption.downloadDataURL(png, 'QRCode.png');
+        const png = await QRCodeCaption.convertDataURLType(document.querySelector("#qr-preview img").src, "image/png");
+        QRCodeCaption.downloadDataURL(png, "QRCode.png");
       }
 
-      document.querySelector('#qr-preview button').addEventListener('click', download);
+      document.querySelector("#qr-preview button").addEventListener("click", download);
 
       generateQRCode();
     </script>

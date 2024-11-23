@@ -1,8 +1,8 @@
 export function convertDataURLType(dataURL: string, type: string) {
-  const canvas = document.createElement('canvas');
-  const ctx = canvas.getContext('2d');
+  const canvas = document.createElement("canvas");
+  const ctx = canvas.getContext("2d");
 
-  if (!ctx) throw new Error('Could not get the 2d context of a canvas');
+  if (!ctx) throw new Error("Could not get the 2d context of a canvas");
 
   const img = new Image();
   const result = new Promise((resolve) => {
@@ -21,7 +21,7 @@ export function convertDataURLType(dataURL: string, type: string) {
 }
 
 export function downloadDataURL(dataURL: string, fileName: string) {
-  const downloadLink = document.createElement('a');
+  const downloadLink = document.createElement("a");
   downloadLink.download = fileName;
   downloadLink.href = dataURL;
   downloadLink.click();
