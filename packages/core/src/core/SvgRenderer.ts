@@ -1,22 +1,17 @@
 import type { QRCode } from "qrcode";
 
 import type { QRCodeSvgRendererOptions } from "./QRCodeSvgRendererOptions";
-import {
-  BLACK,
-  checkNumber,
-  colorToHex,
-  escape,
-  parseHexColorString,
-  parsePercentage,
-  WHITE,
-  type Color,
-} from "./utils";
+import { checkNumber, colorToHex, escape, parseHexColorString, parsePercentage, type Color } from "./utils";
 
 function getOptions(options: QRCodeSvgRendererOptions | undefined, size: number) {
   if (options?.["aria-label"] && options["aria-hidden"])
     throw new Error("Both aria-label and aria-hidden can not be set");
   if (options?.["aria-labelledby"] && options["aria-hidden"])
     throw new Error("Both aria-labelledby and aria-hidden can not be set");
+
+  const BLACK: Color = { r: 0, g: 0, b: 0, a: 255 };
+  const WHITE: Color = { r: 255, g: 255, b: 255, a: 255 };
+
   return {
     width: checkNumber(options?.width, null, { min: 1 }),
     scale: checkNumber(options?.scale, 4, { min: 1 }),

@@ -56,9 +56,6 @@ export interface Color {
   a: NumericRange<0, 255>;
 }
 
-export const BLACK: Color = { r: 0, g: 0, b: 0, a: 255 };
-export const WHITE: Color = { r: 255, g: 255, b: 255, a: 255 };
-
 export function parseHexColorString<T>(value: unknown, nullishValue: T) {
   if (value === null || value === undefined) {
     return nullishValue;
