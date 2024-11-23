@@ -27,6 +27,31 @@ importers:
         specifier: ~5.6.3
         version: 5.6.3
 
+  apps/node-cjs:
+    dependencies:
+      qrcode-caption:
+        specifier: workspace:^
+        version: link:../../packages/core
+
+  apps/node-esm:
+    dependencies:
+      qrcode-caption:
+        specifier: workspace:^
+        version: link:../../packages/core
+
+  apps/vite:
+    dependencies:
+      qrcode-caption:
+        specifier: workspace:^
+        version: link:../../packages/core
+    devDependencies:
+      typescript:
+        specifier: ~5.6.3
+        version: 5.6.3
+      vite:
+        specifier: ^5.4.11
+        version: 5.4.11(terser@5.36.0)
+
   packages/core:
     dependencies:
       mini-svg-data-uri:

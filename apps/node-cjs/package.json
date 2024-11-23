@@ -1,0 +1,15 @@
+{
+  "name": "node-cjs",
+  "private": true,
+  "version": "0.0.0",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "node index.js",
+    "clean": "git clean -xdf .turbo node_modules dist"
+  },
+  "dependencies": {
+    "qrcode-caption": "workspace:^"
+  }
+}
