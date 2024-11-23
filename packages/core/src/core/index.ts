@@ -2,7 +2,7 @@ import svgToMiniDataURI from "mini-svg-data-uri";
 import type { QRCode } from "qrcode";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-import { create } from "qrcode/lib/core/qrcode";
+import { create } from "qrcode/lib/core/qrcode.js";
 
 import type { QRCodeSvgRendererOptions } from "./QRCodeSvgRendererOptions";
 import { render } from "./SvgRenderer";
