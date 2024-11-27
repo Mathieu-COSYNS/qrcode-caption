@@ -1,5 +1,18 @@
 # qrcode-caption
 
+## 0.3.0
+
+### Minor Changes
+
+- 52244d8: fix: underscore does not escape `
+- 52244d8: fix: underscore taking half of the bundle size for one function
+- 12cc5ee: Invalid render options will throw errors. Previously they were silently replaced by default value which cause confusion.
+
+### Patch Changes
+
+- a51ca47: fix: Cannot find module '/home/mc/workspace/test/node_modules/qrcode/lib/core/qrcode' imported from /home/mc/workspace/test/node_modules/qrcode-caption/dist/index.js
+- cb1025e: Shorten hex code in rendered SVGs
+
 ## 0.2.0
 
 ### Minor Changes
