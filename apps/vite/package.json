@@ -1,5 +1,5 @@
 {
-  "name": "vite",
+  "name": "example-vite",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -13,7 +13,7 @@
     "qrcode-caption": "workspace:^"
   },
   "devDependencies": {
-    "typescript": "~5.6.3",
+    "typescript": "~5.7.2",
     "vite": "^5.4.11"
   }
 }

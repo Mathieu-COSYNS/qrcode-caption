@@ -53,11 +53,11 @@
     "@acme/eslint-config": "workspace:*",
     "@types/qrcode": "^1.5.5",
     "@types/underscore": "^1.13.0",
-    "@vitest/coverage-v8": "^2.1.5",
+    "@vitest/coverage-v8": "^2.1.6",
     "eslint": "^9.15.0",
     "terser": "^5.36.0",
     "tsup": "^8.3.5",
-    "typescript": "~5.6.3",
-    "vitest": "^2.1.5"
+    "typescript": "~5.7.2",
+    "vitest": "^2.1.6"
   }
 }
