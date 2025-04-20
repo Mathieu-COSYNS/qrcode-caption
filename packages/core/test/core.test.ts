@@ -145,6 +145,7 @@ it.each([
   { text: "new", caption: "@&/\\#€<>'\"`", snapshot: 34 },
   { text: "new", options: { "aria-hidden": "x" as unknown as boolean }, snapshot: 1 },
   { text: "new", options: { "aria-hidden": "true" as unknown as boolean }, snapshot: 1 },
+  { text: "new", snapshot: 1, option: { width: 0 } },
 ])(
   "should render SVG $snapshot",
   async ({

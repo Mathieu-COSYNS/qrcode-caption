@@ -92,7 +92,7 @@ export function render(qrData: QRCode, caption?: string, options?: QRCodeSvgRend
       }" ${getColorAttrib(opts.color.foreground, "fill")}>${escape(caption)}</text>`
     : "";
 
-  const width = !opts.width ? qrcodeWidth * opts.scale : opts.width;
+  const width = opts.width ?? qrcodeWidth * opts.scale;
   const height = width * (qrcodeHeight / qrcodeWidth);
 
   const attributes = [];
