@@ -19,7 +19,7 @@
     "@acme/tsconfig": "workspace:^",
     "@changesets/cli": "^2.27.11",
     "@manypkg/cli": "^0.23.0",
-    "prettier": "^3.4.2",
+    "prettier": "^3.5.3",
     "turbo": "^2.3.3",
     "typescript": "~5.7.2"
   },
