@@ -27,8 +27,8 @@ importers:
         specifier: ^2.5.0
         version: 2.5.0
       typescript:
-        specifier: ~5.7.2
-        version: 5.7.2
+        specifier: ~5.8.3
+        version: 5.8.3
 
   apps/node-cjs:
     dependencies:
@@ -49,8 +49,8 @@ importers:
         version: link:../../packages/core
     devDependencies:
       typescript:
-        specifier: ~5.7.2
-        version: 5.7.2
+        specifier: ~5.8.3
+        version: 5.8.3
       vite:
         specifier: ^6.3.2
         version: 6.3.2
@@ -84,10 +84,10 @@ importers:
         version: 5.37.0
       tsup:
         specifier: ^8.3.5
-        version: 8.3.5(typescript@5.7.2)
+        version: 8.3.5(typescript@5.8.3)
       typescript:
-        specifier: ~5.7.2
-        version: 5.7.2
+        specifier: ~5.8.3
+        version: 5.8.3
       vitest:
         specifier: ^2.1.9
         version: 2.1.9(terser@5.37.0)
@@ -3853,7 +3853,7 @@ packages:
     resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
     dev: false
 
-  /tsup@8.3.5(typescript@5.7.2):
+  /tsup@8.3.5(typescript@5.8.3):
     resolution: {integrity: sha512-Tunf6r6m6tnZsG9GYWndg0z8dEV7fD733VBFzFJ5Vcm1FtlXB8xBD/rtrBi2a3YKEV7hHtxiZtW5EAVADoe1pA==}
     engines: {node: '>=18'}
     hasBin: true
@@ -3888,7 +3888,7 @@ packages:
       tinyexec: 0.3.1
       tinyglobby: 0.2.10
       tree-kill: 1.2.2
-      typescript: 5.7.2
+      typescript: 5.8.3
     transitivePeerDependencies:
       - jiti
       - supports-color
@@ -3971,17 +3971,10 @@ packages:
       - supports-color
     dev: false
 
-  /typescript@5.7.2:
-    resolution: {integrity: sha512-i5t66RHxDvVN40HfDd1PsEThGNnlMCMT3jMUuoh9/0TaqWevNontacunWyN02LA9/fIbEWlcHZcgTKb9QoaLfg==}
-    engines: {node: '>=14.17'}
-    hasBin: true
-    dev: true
-
   /typescript@5.8.3:
     resolution: {integrity: sha512-p1diW6TqL9L07nNxvRMM7hMMw4c5XOo/1ibL4aAIGmSAt9slTE1Xgw5KWuof2uTOvCg9BY7ZRi+GaF+7sfgPeQ==}
     engines: {node: '>=14.17'}
     hasBin: true
-    dev: false
 
   /undici-types@6.20.0:
     resolution: {integrity: sha512-Ny6QZ2Nju20vw1SRHe3d9jVu6gJ+4e3+MMpqu7pqE5HT6WsTSlce++GQmK5UXS8mzV8DSYHrQH+Xrf2jVcuKNg==}
