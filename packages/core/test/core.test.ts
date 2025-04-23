@@ -1,6 +1,10 @@
+import { toMatchImageSnapshot } from "jest-image-snapshot";
+import sharp from "sharp";
 import { expect, it } from "vitest";
 
 import { toDataURL, toSVG, type QRCodeOptions } from "../src/core";
+
+expect.extend({ toMatchImageSnapshot });
 
 it.each([
   { text: "new", snapshot: 1 },
@@ -170,6 +174,14 @@ it.each([
       const dataUrl = toDataURL(text, options);
       await expect(dataUrl).toMatchFileSnapshot(`__snapshots__/${snapshot}.txt`);
     }
+
+    // Use sharp to convert SVG to PNG buffer
+    const pngBuffer = await sharp(Buffer.from(svg)).png().toBuffer();
+
+    expect(pngBuffer).toMatchImageSnapshot({
+      customSnapshotsDir: "test/__snapshots__",
+      customSnapshotIdentifier: `${snapshot}`,
+    });
   },
 );
 
