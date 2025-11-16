@@ -176,7 +176,7 @@ it.each([
     }
 
     // Use sharp to convert SVG to PNG buffer
-    const pngBuffer = await sharp(Buffer.from(svg)).png().toBuffer();
+    const pngBuffer = await sharp(Buffer.from(svg), { density: 300 }).png().toBuffer();
 
     expect(pngBuffer).toMatchImageSnapshot({
       customSnapshotsDir: "test/__snapshots__",
