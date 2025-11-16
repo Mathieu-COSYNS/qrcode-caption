@@ -1,5 +1,12 @@
 # qrcode-caption
 
+## 0.4.0
+
+### Minor Changes
+
+- d7626fb: feat: draw svg with shapes + fill color instead of lines and strokes
+- d6225f5: feat: add rounding because most decimal places are irrelevant in the case of generating a QRCode
+
 ## 0.3.0
 
 ### Minor Changes
