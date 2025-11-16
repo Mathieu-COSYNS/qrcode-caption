@@ -124,3 +124,71 @@ export function escape(string: string) {
     return entityMap[s as "&" | "<" | ">" | '"' | "'" | "`"];
   });
 }
+
+/**
+ * Rounds a number to a specified decimal precision.
+ *
+ * NOTE: this is not a perfect solution read the debate:
+ * https://stackoverflow.com/questions/11832914/how-to-round-to-at-most-2-decimal-places-if-necessary
+ *
+ * @param {number} value - The numeric value to round.
+ * @param {number} [precision=0] - The number of decimal places to round to.
+ *   Positive values round to the right of the decimal, negative values round to
+ *   the left.
+ * @returns {number} The rounded number.
+ *
+ * @example
+ * round(3.14159);       // 3
+ * round(3.14159, 2);    // 3.14
+ * round(1234.56, -2);   // 1200
+ */
+export function round(value: number, precision = 0) {
+  const roundingFactor = Math.pow(10, precision);
+  const EPSILON_CORRECTION = value >= 0 ? Number.EPSILON : -Number.EPSILON;
+  const roundedValue = Math.round(value * (1 + EPSILON_CORRECTION) * roundingFactor) / roundingFactor;
+  return roundedValue;
+}
+
+/**
+ * Converts a number or a list of numbers into a compact string suitable for SVG path definitions.
+ *
+ * @param value - A numeric value or an array of numeric values to convert.
+ * @param precision - Maximum number of decimal places (default is 5).
+ * @returns A compact string representation of the number(s) for SVG paths.
+ */
+export function numberToSvgString(value: number | number[], precision = 5): string {
+  const convert = (val: number): string => {
+    if (!Number.isFinite(val)) {
+      throw new Error("Inputs must be finite numbers");
+    }
+
+    return round(val, precision)
+      .toString()
+      .replace(/^(-?)0+\./, "$1.");
+  };
+
+  const values = Array.isArray(value) ? value : [value];
+  const result: string[] = [];
+
+  for (let i = 0; i < values.length; i++) {
+    const str = convert(values[i]);
+
+    if (i === 0) {
+      result.push(str);
+      continue;
+    }
+
+    const prev = result[result.length - 1];
+    const isPositive = !str.startsWith("-");
+    const startsWithDot = str.startsWith(".");
+    const prevHasDot = prev.includes(".");
+
+    if (isPositive && (!startsWithDot || !prevHasDot)) {
+      result.push(" " + str);
+    } else {
+      result.push(str);
+    }
+  }
+
+  return result.join("");
+}

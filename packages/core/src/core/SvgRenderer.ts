@@ -1,7 +1,16 @@
 import type { QRCode } from "qrcode";
 
 import type { QRCodeSvgRendererOptions } from "./QRCodeSvgRendererOptions";
-import { checkNumber, colorToHex, escape, parseHexColorString, parsePercentage, type Color } from "./utils";
+import {
+  checkNumber,
+  colorToHex,
+  escape,
+  numberToSvgString,
+  parseHexColorString,
+  parsePercentage,
+  round,
+  type Color,
+} from "./utils";
 
 function getOptions(options: QRCodeSvgRendererOptions | undefined, size: number) {
   if (options?.["aria-label"] && options["aria-hidden"])
@@ -50,14 +59,16 @@ function qrToPath(data: Uint8Array, size: number, margin: number) {
       lineLength++;
 
       if (!(i > 0 && col > 0 && data[i - 1])) {
-        path += newRow ? `M${col + margin} ${0.5 + row + margin}` : `m${moveBy} 0`;
+        path += newRow
+          ? `M${numberToSvgString([col + margin, 0.5 + row + margin])}`
+          : `m${numberToSvgString([moveBy, 0])}`;
 
         moveBy = 0;
         newRow = false;
       }
 
       if (!(col + 1 < size && data[i + 1])) {
-        path += `h${lineLength}`;
+        path += `h${numberToSvgString(lineLength)}`;
         lineLength = 0;
       }
     } else {
@@ -80,14 +91,13 @@ export function render(qrData: QRCode, caption?: string, options?: QRCodeSvgRend
 
   const bg = !opts.color.background.a
     ? ""
-    : `<rect ${getColorAttrib(opts.color.background, "fill")} width="${qrcodeWidth}" height="${qrcodeHeight}"/>`;
+    : `<rect ${getColorAttrib(opts.color.background, "fill")} width="${round(qrcodeWidth, 5)}" height="${round(qrcodeHeight, 5)}"/>`;
 
   const fg = `<path ${getColorAttrib(opts.color.foreground, "stroke")} d="${qrToPath(data, size, opts.margin)}"/>`;
 
+  const textY = round(qrcodeWidth - opts.margin / 2 + captionEstimatedBaseline, 5);
   const text = caption
-    ? `<text y="${
-        qrcodeWidth - opts.margin / 2 + captionEstimatedBaseline
-      }" x="50%" text-anchor="middle" font-family="Verdana, 'Bitstream Vera Sans', 'DejaVu Sans', Tahoma, Geneva, Arial, Sans-serif" font-size="${
+    ? `<text y="${textY}" x="50%" text-anchor="middle" font-family="Verdana, 'Bitstream Vera Sans', 'DejaVu Sans', Tahoma, Geneva, Arial, Sans-serif" font-size="${
         opts.fontSize
       }" ${getColorAttrib(opts.color.foreground, "fill")}>${escape(caption)}</text>`
     : "";
@@ -97,9 +107,9 @@ export function render(qrData: QRCode, caption?: string, options?: QRCodeSvgRend
 
   const attributes = [];
 
-  attributes.push(`width="${width}"`);
-  attributes.push(`height="${height}"`);
-  attributes.push(`viewBox="0 0 ${qrcodeWidth} ${qrcodeHeight}"`);
+  attributes.push(`width="${round(width, 5)}"`);
+  attributes.push(`height="${round(height, 5)}"`);
+  attributes.push(`viewBox="0 0 ${round(qrcodeWidth, 5)} ${round(qrcodeHeight, 5)}"`);
   attributes.push('shape-rendering="crispEdges"');
 
   if (opts["aria-label"]) attributes.push(`aria-label="${opts["aria-label"]}"`);
