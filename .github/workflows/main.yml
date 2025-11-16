@@ -24,6 +24,7 @@ jobs:
             ttf-mscorefonts-installer \
             fontconfig
           sudo fc-cache -f -v
+          fc-list | grep -iE "verdana"
 
       - uses: actions/checkout@v5
       - uses: pnpm/action-setup@v4
