@@ -1,5 +1,13 @@
 # example-vite
 
+## 0.0.3
+
+### Patch Changes
+
+- Updated dependencies [d7626fb]
+- Updated dependencies [d6225f5]
+  - qrcode-caption@0.4.0
+
 ## 0.0.2
 
 ### Patch Changes
