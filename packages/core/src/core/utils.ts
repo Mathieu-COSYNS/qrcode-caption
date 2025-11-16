@@ -110,7 +110,7 @@ export function colorToHex(color: Color, transparency = false) {
   return hexStr;
 }
 
-export function escape(string: string) {
+export function escape(string: unknown) {
   const entityMap = {
     "&": "&amp;",
     "<": "&lt;",
