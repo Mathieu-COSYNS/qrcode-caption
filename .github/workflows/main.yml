@@ -29,3 +29,11 @@ jobs:
       - run: pnpm run typecheck
       - run: pnpm run build
       - run: pnpm run test
+
+      - name: Upload image diffs
+        if: failure()
+        uses: actions/upload-artifact@v5
+        with:
+          name: core-tests-image-diffs
+          path: |
+            packages/core/test/__snapshots__/__diff_output__/**
