@@ -19,6 +19,7 @@ jobs:
       - name: Install fonts for SVG rendering
         run: |
           sudo apt-get update
+          echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections
           sudo apt-get install -y \
             fonts-dejavu \
             ttf-mscorefonts-installer \
