@@ -4,12 +4,11 @@ import type { QRCode } from "qrcode";
 // @ts-ignore
 import { create } from "qrcode/lib/core/qrcode.js";
 
-import type { QRCodeSvgRendererOptions } from "./QRCodeSvgRendererOptions";
+import type { QRCodeSvgRendererOptions as QRCodeOptions } from "./QRCodeSvgRendererOptions";
 import { render } from "./SvgRenderer";
 
 export { type Percentage } from "./Percentage";
-
-export type QRCodeOptions = QRCodeSvgRendererOptions;
+export { type QRCodeOptions };
 
 function getCaptionAndOptions(captionOrOptions?: string | QRCodeOptions, opts?: QRCodeOptions) {
   if (captionOrOptions && typeof captionOrOptions === "object")
