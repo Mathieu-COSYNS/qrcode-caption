@@ -24,6 +24,7 @@ jobs:
         uses: withastro/action@v5
         with:
           path: ./apps/docs
+          package-manager: pnpm@9.15.9
         # env:
         # PUBLIC_POKEAPI: 'https://pokeapi.co/api/v2' # Use single quotation marks for the variable value. (optional)
 
