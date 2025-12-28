@@ -1,0 +1,24 @@
+---
+import Default from "@astrojs/starlight/components/TwoColumnContent.astro";
+
+import Hero from "./Hero.astro";
+
+const { hero } = Astro.locals.starlightRoute.entry.data;
+---
+
+{hero?.placement === "above-two-column-content" && <Hero show={true} />}
+<div class="two-column-content-wrapper">
+  <Default {...Astro.props}>
+    <slot name="right-sidebar" slot="right-sidebar" />
+    <slot />
+  </Default>
+</div>
+
+<style>
+  .two-column-content-wrapper :global(.right-sidebar) {
+    position: sticky;
+    padding-top: 0;
+    top: var(--sl-nav-height);
+    height: calc(100vh - var(--sl-nav-height));
+  }
+</style>

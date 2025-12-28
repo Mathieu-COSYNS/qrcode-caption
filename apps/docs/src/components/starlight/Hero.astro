@@ -1,0 +1,24 @@
+---
+import Default from "@astrojs/starlight/components/Hero.astro";
+
+import QrCodeGeneratorHero from "./QrCodeGeneratorHero.astro";
+
+const props = Astro.props;
+const { hero } = Astro.locals.starlightRoute.entry.data;
+
+const show = props.show ?? hero?.placement === "initial";
+---
+
+{
+  show && (
+    <>
+      {hero?.generatorType ? (
+        <QrCodeGeneratorHero {...Astro.props} />
+      ) : (
+        <Default {...Astro.props}>
+          <slot />
+        </Default>
+      )}
+    </>
+  )
+}

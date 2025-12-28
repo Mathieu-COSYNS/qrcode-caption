@@ -1,0 +1,60 @@
+---
+import FallbackContentNotice from "@astrojs/starlight/components/FallbackContentNotice.astro";
+import PageTitle from "@astrojs/starlight/components/PageTitle.astro";
+
+// import { getLocaleRoutes } from "~/../node_modules/@astrojs/starlight/utils/routing";
+import { TextQrCodeGenerator } from "~/components/QrCodeGenerator";
+
+// import { buttonVariants } from "~/components/ui/Button";
+// import { Icon } from "~/components/ui/Icon";
+// import { cn } from "~/lib/utils";
+
+const locale = Astro.locals.starlightRoute.locale;
+const id = Astro.locals.starlightRoute.entry.id;
+
+const { hero } = Astro.locals.starlightRoute.entry.data;
+
+if (!hero?.generatorType) throw new Error("Only generator type allowed");
+
+const generatorSlugRegExp = RegExp(locale ? `^${locale}/generate/.*$` : `^generate/.*$`);
+
+// const qrCodeGeneratorLinks = getLocaleRoutes(locale)
+//   .filter((route) => generatorSlugRegExp.test(route.id))
+//   .sort((a, b) => {
+//     if (typeof a.entry.data.sidebar.order === "undefined" && typeof b.entry.data.sidebar.order === "undefined")
+//       return a.entry.id.localeCompare(b.entry.id);
+//     if (typeof a.entry.data.sidebar.order === "undefined" && typeof b.entry.data.sidebar.order !== "undefined")
+//       return 1;
+//     if (typeof b.entry.data.sidebar.order === "undefined" && typeof a.entry.data.sidebar.order !== "undefined")
+//       return -1;
+//     return (a.entry.data.sidebar.order || 0) - (b.entry.data.sidebar.order || 0);
+//   })
+//   .map((route) => ({
+//     label: route.entry.data.sidebar.label || route.entry.data.title,
+//     href: `/${route.id}`,
+//     icon: "icon" in route.entry.data && route.entry.data.icon,
+//     active: route.id === id,
+//   }));
+---
+
+<div class="flex flex-col items-center text-center">
+  {Astro.props.isFallback && <FallbackContentNotice {...Astro.props} />}
+  <PageTitle {...Astro.props} />
+  <!-- <div data-pagefind-ignore>
+    <ul class="mb-12 flex list-none flex-wrap justify-center gap-2 pt-9">
+      {
+        qrCodeGeneratorLinks.map((link) => (
+          <li>
+            <a class={cn(buttonVariants({ variant: link.active ? "primary" : "secondary" }))} href={link.href}>
+              {link.icon && <Icon name={link.icon} className="mr-2 h-4 w-4" />}
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div> -->
+</div>
+<div class="mb-24">
+  {hero.generatorType === "text" && <TextQrCodeGenerator client:load />}
+</div>
