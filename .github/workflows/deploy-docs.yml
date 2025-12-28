@@ -27,7 +27,15 @@ jobs:
           cache: "pnpm"
           cache-dependency-path: "./pnpm-lock.yaml"
 
-      - name: Install project dependencies
+      - name: Install core dependencies
+        run: pnpm install --frozen-lockfile
+        working-directory: ./packages/core
+
+      - name: Build core
+        run: pnpm build
+        working-directory: ./packages/core
+
+      - name: Install docs dependencies
         run: pnpm install --frozen-lockfile
         working-directory: ./apps/docs
 
