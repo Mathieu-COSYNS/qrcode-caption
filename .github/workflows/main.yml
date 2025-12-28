@@ -27,7 +27,7 @@ jobs:
           sudo fc-cache -f -v
           fc-list | grep -iE "verdana"
 
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v6
         with:
@@ -43,7 +43,7 @@ jobs:
 
       - name: Upload image diffs
         if: failure()
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: node-${{ matrix.node }}-core-tests-image-diffs
           path: |
