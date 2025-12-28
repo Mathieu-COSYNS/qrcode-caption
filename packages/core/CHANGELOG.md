@@ -1,5 +1,20 @@
 # qrcode-caption
 
+## 0.4.0
+
+### Minor Changes
+
+- d7626fb: feat: draw svg with shapes + fill color instead of lines and strokes
+- b2b2d60: feat: add new browser utils: supportsCanvasFormat
+- b2b2d60: feat: add blob as a possible format returned by convertDataURLType browser utils
+- d6225f5: feat: add rounding because most decimal places are irrelevant in the case of generating a QRCode
+
+### Patch Changes
+
+- b2b2d60: docs: add readme to start documenting how qrcode-caption works
+- b2b2d60: test: add test to compare png images pixels per pixels
+- b2b2d60: refactor: change QRCodeOptions from type alias to import alias for future doc gen with typedoc
+
 ## 0.3.0
 
 ### Minor Changes
