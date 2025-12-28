@@ -17,10 +17,10 @@
   "devDependencies": {
     "@acme/prettier-config": "workspace:^",
     "@acme/tsconfig": "workspace:^",
-    "@changesets/cli": "^2.29.7",
+    "@changesets/cli": "^2.29.8",
     "@manypkg/cli": "^0.25.1",
-    "prettier": "^3.6.2",
-    "turbo": "^2.6.1",
+    "prettier": "^3.7.4",
+    "turbo": "^2.7.2",
     "typescript": "~5.9.3"
   },
   "prettier": "@acme/prettier-config"
