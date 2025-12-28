@@ -20,13 +20,24 @@ jobs:
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v6
-      - name: Install, build, and upload your site
-        uses: withastro/action@v5
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v6
         with:
-          path: ./apps/docs
-          package-manager: pnpm@9.15.9
-        # env:
-        # PUBLIC_POKEAPI: 'https://pokeapi.co/api/v2' # Use single quotation marks for the variable value. (optional)
+          node-version: 22
+          cache: "pnpm"
+          cache-dependency-path: "./pnpm-lock.yaml"
+
+      - name: Install project dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build docs
+        run: pnpm build
+        working-directory: ./apps/docs
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: ./apps/docs/dist
 
   deploy:
     needs: build
