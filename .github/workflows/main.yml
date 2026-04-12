@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [20, 22, 24]
+        node: [22, 24]
     name: Node ${{ matrix.node }}
     steps:
       - name: Install fonts for SVG rendering
@@ -28,7 +28,7 @@ jobs:
           fc-list | grep -iE "verdana"
 
       - uses: actions/checkout@v6
-      - uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v5
       - uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node }}
@@ -43,7 +43,7 @@ jobs:
 
       - name: Upload image diffs
         if: failure()
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: node-${{ matrix.node }}-core-tests-image-diffs
           path: |
