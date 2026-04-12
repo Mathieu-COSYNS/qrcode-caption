@@ -43,7 +43,7 @@
     "release": "pnpm run build && pnpm changeset publish",
     "lint": "eslint . --max-warnings 0",
     "typecheck": "tsc --noEmit",
-    "clean": "git clean -xdf .turbo node_modules dist"
+    "clean": "git clean -xdf .turbo node_modules dist coverage"
   },
   "dependencies": {
     "mini-svg-data-uri": "^1.4.4",

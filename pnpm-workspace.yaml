@@ -6,3 +6,9 @@ packages:
 onlyBuiltDependencies:
   - esbuild
   - sharp
+
+# FIXME: https://github.com/prettier/prettier/issues/17565
+publicHoistPattern:
+  - "prettier-plugin-astro"
+  - "@ianvs/prettier-plugin-sort-imports"
+  - "prettier-plugin-tailwindcss"
