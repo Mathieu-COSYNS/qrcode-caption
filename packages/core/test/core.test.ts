@@ -204,6 +204,6 @@ it.each([
 ])(
   "should not render SVG and throw $error",
   ({ text, caption, options, error }: { text: string; caption?: string; options?: QRCodeOptions; error: string }) => {
-    expect(() => toSVG(text, caption, options)).toThrowError(error);
+    expect(() => toSVG(text, caption, options)).toThrow(error);
   },
 );

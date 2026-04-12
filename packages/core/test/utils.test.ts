@@ -45,7 +45,7 @@ it.each([
     if (typeof expected === "undefined") {
       expect(() => {
         parseHexColorString(input, null);
-      }).toThrowError();
+      }).toThrow();
 
       return;
     }
