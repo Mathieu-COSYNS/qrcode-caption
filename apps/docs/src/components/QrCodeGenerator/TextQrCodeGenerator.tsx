@@ -1,10 +1,10 @@
 import { useMemo } from "react";
 import { Form } from "@base-ui/react/form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "astro/zod";
+import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { FormProvider, useForm, useFormContext, useWatch } from "react-hook-form";
 import TextareaAutosize from "react-textarea-autosize";
 import { useDebounce } from "use-debounce";
+import { z } from "zod";
 
 import { Input } from "~/components/ui/input";
 import { FormField } from "../ui/form";
@@ -15,11 +15,9 @@ const formSchema = z.object({
   caption: z.string(),
 });
 
-type FormValues = z.infer<typeof formSchema>;
-
 const TextQrCodeGeneratorForm = () => {
   const value = useWatch();
-  const form = useFormContext<FormValues>();
+  const form = useFormContext<z.input<typeof formSchema>, unknown, z.output<typeof formSchema>>();
 
   return (
     <div className="space-y-4 p-6">
@@ -35,10 +33,10 @@ const TextQrCodeGeneratorForm = () => {
 };
 
 export const TextQrCodeGenerator = () => {
-  const form = useForm<FormValues>({
+  const form = useForm({
     mode: "onTouched",
     shouldFocusError: false,
-    resolver: zodResolver(formSchema),
+    resolver: standardSchemaResolver(formSchema),
     defaultValues: {
       text: "",
       caption: "",

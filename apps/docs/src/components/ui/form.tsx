@@ -29,7 +29,7 @@ const FormField = <
             value={value}
             onBlur={onBlur}
             onValueChange={onChange}
-            render={render ?? Input}
+            render={render ?? <Input />}
           />
           {description && (
             <FieldPrimitive.Description className="text-sm leading-normal font-normal text-gray-600 dark:text-gray-300">

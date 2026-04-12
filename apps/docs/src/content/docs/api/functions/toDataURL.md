@@ -9,7 +9,7 @@ title: "toDataURL"
 
 > **toDataURL**(`text`, `caption?`, `options?`): `string`
 
-Defined in: [packages/core/src/core/index.ts:47](https://github.com/Mathieu-COSYNS/qrcode-caption/blob/3cd34d0191a6755511f4210731fa281f49744fc8/packages/core/src/core/index.ts#L47)
+Defined in: [packages/core/src/core/index.ts:47](https://github.com/Mathieu-COSYNS/qrcode-caption/blob/a1936396a177e82774d1143d456beda8ee324dff/packages/core/src/core/index.ts#L47)
 
 Returns a Data URL of a SVG representation of the QR Code
 
@@ -41,7 +41,7 @@ Optional configuration
 
 > **toDataURL**(`text`, `options?`): `string`
 
-Defined in: [packages/core/src/core/index.ts:48](https://github.com/Mathieu-COSYNS/qrcode-caption/blob/3cd34d0191a6755511f4210731fa281f49744fc8/packages/core/src/core/index.ts#L48)
+Defined in: [packages/core/src/core/index.ts:48](https://github.com/Mathieu-COSYNS/qrcode-caption/blob/a1936396a177e82774d1143d456beda8ee324dff/packages/core/src/core/index.ts#L48)
 
 Returns a Data URL of a SVG representation of the QR Code
 

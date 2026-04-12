@@ -5,7 +5,7 @@ prev: false
 title: "QRCodeOptions"
 ---
 
-Defined in: [packages/core/src/core/QRCodeSvgRendererOptions.ts:6](https://github.com/Mathieu-COSYNS/qrcode-caption/blob/3cd34d0191a6755511f4210731fa281f49744fc8/packages/core/src/core/QRCodeSvgRendererOptions.ts#L6)
+Defined in: [packages/core/src/core/QRCodeSvgRendererOptions.ts:6](https://github.com/Mathieu-COSYNS/qrcode-caption/blob/a1936396a177e82774d1143d456beda8ee324dff/packages/core/src/core/QRCodeSvgRendererOptions.ts#L6)
 
 ## Extends
 
@@ -15,37 +15,37 @@ Defined in: [packages/core/src/core/QRCodeSvgRendererOptions.ts:6](https://githu
 
 ### aria-hidden?
 
-> `optional` **aria-hidden**: `boolean`
+> `optional` **aria-hidden?**: `boolean`
 
-Defined in: [packages/core/src/core/QRCodeSvgRendererOptions.ts:11](https://github.com/Mathieu-COSYNS/qrcode-caption/blob/3cd34d0191a6755511f4210731fa281f49744fc8/packages/core/src/core/QRCodeSvgRendererOptions.ts#L11)
+Defined in: [packages/core/src/core/QRCodeSvgRendererOptions.ts:11](https://github.com/Mathieu-COSYNS/qrcode-caption/blob/a1936396a177e82774d1143d456beda8ee324dff/packages/core/src/core/QRCodeSvgRendererOptions.ts#L11)
 
 ***
 
 ### aria-label?
 
-> `optional` **aria-label**: `string`
+> `optional` **aria-label?**: `string`
 
-Defined in: [packages/core/src/core/QRCodeSvgRendererOptions.ts:9](https://github.com/Mathieu-COSYNS/qrcode-caption/blob/3cd34d0191a6755511f4210731fa281f49744fc8/packages/core/src/core/QRCodeSvgRendererOptions.ts#L9)
+Defined in: [packages/core/src/core/QRCodeSvgRendererOptions.ts:9](https://github.com/Mathieu-COSYNS/qrcode-caption/blob/a1936396a177e82774d1143d456beda8ee324dff/packages/core/src/core/QRCodeSvgRendererOptions.ts#L9)
 
 ***
 
 ### aria-labelledby?
 
-> `optional` **aria-labelledby**: `string`
+> `optional` **aria-labelledby?**: `string`
 
-Defined in: [packages/core/src/core/QRCodeSvgRendererOptions.ts:10](https://github.com/Mathieu-COSYNS/qrcode-caption/blob/3cd34d0191a6755511f4210731fa281f49744fc8/packages/core/src/core/QRCodeSvgRendererOptions.ts#L10)
+Defined in: [packages/core/src/core/QRCodeSvgRendererOptions.ts:10](https://github.com/Mathieu-COSYNS/qrcode-caption/blob/a1936396a177e82774d1143d456beda8ee324dff/packages/core/src/core/QRCodeSvgRendererOptions.ts#L10)
 
 ***
 
 ### color?
 
-> `optional` **color**: `object`
+> `optional` **color?**: `object`
 
 Defined in: node\_modules/.pnpm/@types+qrcode@1.5.6/node\_modules/@types/qrcode/index.d.ts:172
 
 #### dark?
 
-> `optional` **dark**: `string`
+> `optional` **dark?**: `string`
 
 Color of dark module. Value must be in hex format (RGBA).
 Note: dark color should always be darker than `color.light`.
@@ -58,7 +58,7 @@ Note: dark color should always be darker than `color.light`.
 
 #### light?
 
-> `optional` **light**: `string`
+> `optional` **light?**: `string`
 
 Color of light module. Value must be in hex format (RGBA).
 
@@ -76,7 +76,7 @@ Color of light module. Value must be in hex format (RGBA).
 
 ### errorCorrectionLevel?
 
-> `optional` **errorCorrectionLevel**: `QRCodeErrorCorrectionLevel`
+> `optional` **errorCorrectionLevel?**: `QRCodeErrorCorrectionLevel`
 
 Defined in: node\_modules/.pnpm/@types+qrcode@1.5.6/node\_modules/@types/qrcode/index.d.ts:18
 
@@ -96,23 +96,23 @@ Error correction level.
 
 ### fontSize?
 
-> `optional` **fontSize**: `number` \| `` `${number}%` `` \| `null`
+> `optional` **fontSize?**: `number` \| `` `${number}%` `` \| `null`
 
-Defined in: [packages/core/src/core/QRCodeSvgRendererOptions.ts:7](https://github.com/Mathieu-COSYNS/qrcode-caption/blob/3cd34d0191a6755511f4210731fa281f49744fc8/packages/core/src/core/QRCodeSvgRendererOptions.ts#L7)
+Defined in: [packages/core/src/core/QRCodeSvgRendererOptions.ts:7](https://github.com/Mathieu-COSYNS/qrcode-caption/blob/a1936396a177e82774d1143d456beda8ee324dff/packages/core/src/core/QRCodeSvgRendererOptions.ts#L7)
 
 ***
 
 ### margin?
 
-> `optional` **margin**: `number` \| `` `${number}%` `` \| `null`
+> `optional` **margin?**: `number` \| `` `${number}%` `` \| `null`
 
-Defined in: [packages/core/src/core/QRCodeSvgRendererOptions.ts:8](https://github.com/Mathieu-COSYNS/qrcode-caption/blob/3cd34d0191a6755511f4210731fa281f49744fc8/packages/core/src/core/QRCodeSvgRendererOptions.ts#L8)
+Defined in: [packages/core/src/core/QRCodeSvgRendererOptions.ts:8](https://github.com/Mathieu-COSYNS/qrcode-caption/blob/a1936396a177e82774d1143d456beda8ee324dff/packages/core/src/core/QRCodeSvgRendererOptions.ts#L8)
 
 ***
 
 ### maskPattern?
 
-> `optional` **maskPattern**: `QRCodeMaskPattern`
+> `optional` **maskPattern?**: `QRCodeMaskPattern`
 
 Defined in: node\_modules/.pnpm/@types+qrcode@1.5.6/node\_modules/@types/qrcode/index.d.ts:24
 
@@ -128,7 +128,7 @@ If not specified the more suitable value will be calculated.
 
 ### scale?
 
-> `optional` **scale**: `number`
+> `optional` **scale?**: `number`
 
 Defined in: node\_modules/.pnpm/@types+qrcode@1.5.6/node\_modules/@types/qrcode/index.d.ts:165
 
@@ -148,7 +148,7 @@ Scale factor. A value of `1` means 1px per modules (black dots).
 
 ### toSJISFunc?
 
-> `optional` **toSJISFunc**: `QRCodeToSJISFunc`
+> `optional` **toSJISFunc?**: `QRCodeToSJISFunc`
 
 Defined in: node\_modules/.pnpm/@types+qrcode@1.5.6/node\_modules/@types/qrcode/index.d.ts:29
 
@@ -163,7 +163,7 @@ Provide this function if you need support for Kanji mode.
 
 ### version?
 
-> `optional` **version**: `number`
+> `optional` **version?**: `number`
 
 Defined in: node\_modules/.pnpm/@types+qrcode@1.5.6/node\_modules/@types/qrcode/index.d.ts:13
 
@@ -177,7 +177,7 @@ QR Code version. If not specified the more suitable value will be calculated.
 
 ### width?
 
-> `optional` **width**: `number`
+> `optional` **width?**: `number`
 
 Defined in: node\_modules/.pnpm/@types+qrcode@1.5.6/node\_modules/@types/qrcode/index.d.ts:171
 
