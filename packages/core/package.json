@@ -51,16 +51,16 @@
   },
   "devDependencies": {
     "@acme/eslint-config": "workspace:*",
-    "@types/jest-image-snapshot": "^6.4.0",
+    "@types/jest-image-snapshot": "^6.4.1",
     "@types/qrcode": "^1.5.6",
     "@types/underscore": "^1.13.0",
-    "@vitest/coverage-v8": "^4.0.16",
-    "eslint": "^9.39.2",
-    "jest-image-snapshot": "^6.5.1",
+    "@vitest/coverage-v8": "^4.1.4",
+    "eslint": "^9.39.4",
+    "jest-image-snapshot": "^6.5.2",
     "sharp": "^0.34.5",
-    "terser": "^5.44.1",
+    "terser": "^5.46.1",
     "tsup": "^8.5.1",
     "typescript": "~5.9.3",
-    "vitest": "^4.0.16"
+    "vitest": "^4.1.4"
   }
 }
