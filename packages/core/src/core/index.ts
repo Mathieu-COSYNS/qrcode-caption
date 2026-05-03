@@ -20,13 +20,22 @@ function getCaptionAndOptions(captionOrOptions?: string | QRCodeOptions, opts?: 
 }
 
 /**
- * Returns a SVG representation as a string of the QR Code
+ * Builds an SVG string representing a QR code with an optional caption below
+ * the QR code.
  *
- * @param text The QR Code content
- * @param caption The QR Code caption
- * @param options Optional configuration
+ * @param text - The content to be encoded in the QR code.
+ * @param caption - Label rendered under the QR code.
+ * @param options - Rendering and QR generation options.
+ * @returns SVG markup as a string.
  */
 export function toSVG(text: string, caption?: string, options?: QRCodeOptions): string;
+/**
+ * Builds an SVG string representing a QR code without a caption.
+ *
+ * @param text - The content to be encoded in the QR code.
+ * @param options - Rendering and QR generation options.
+ * @returns SVG markup as a string.
+ */
 export function toSVG(text: string, options?: QRCodeOptions): string;
 
 export function toSVG(text: string, captionOrOptions?: string | QRCodeOptions, opts?: QRCodeOptions) {
@@ -38,13 +47,23 @@ export function toSVG(text: string, captionOrOptions?: string | QRCodeOptions, o
 }
 
 /**
- * Returns a Data URL of a SVG representation of the QR Code
+ * Like {@link toSVG}, but returns a compact `data:image/svg+xml,...` URL for
+ * `<img src>` or downloads.
  *
- * @param text The QR Code content
- * @param caption The QR Code caption
- * @param options Optional configuration
+ * @param text - The content to be encoded in the QR code.
+ * @param caption - Label rendered under the QR modules.
+ * @param options - Rendering and QR generation options.
+ * @returns A data URL containing the SVG.
  */
 export function toDataURL(text: string, caption?: string, options?: QRCodeOptions): string;
+/**
+ * Like {@link toSVG}, but returns a compact `data:image/svg+xml,...` URL
+ * without a caption.
+ *
+ * @param text - The content to be encoded in the QR code.
+ * @param options - Rendering and QR generation options.
+ * @returns A data URL containing the SVG.
+ */
 export function toDataURL(text: string, options?: QRCodeOptions): string;
 
 export function toDataURL(text: string, captionOrOptions?: string | QRCodeOptions, opts?: QRCodeOptions) {
