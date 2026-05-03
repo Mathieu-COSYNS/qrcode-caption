@@ -17,6 +17,7 @@
     },
     "lint": {},
     "typecheck": {
+      "dependsOn": ["^build"],
       "outputs": [".cache/tsbuildinfo.json"]
     },
     "clean": {
