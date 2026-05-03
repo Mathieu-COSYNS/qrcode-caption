@@ -80,15 +80,15 @@ importers:
       sharp:
         specifier: ^0.34.5
         version: 0.34.5
-      shiki:
-        specifier: ^4.0.2
-        version: 4.0.2
       starlight-changelogs:
         specifier: ^0.5.0
         version: 0.5.0(@astrojs/starlight@0.38.4(astro@6.2.1(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.2)(terser@5.46.2)(typescript@5.9.3)(yaml@2.8.4)))(astro@6.2.1(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.2)(terser@5.46.2)(typescript@5.9.3)(yaml@2.8.4))
       starlight-typedoc:
         specifier: ^0.21.5
         version: 0.21.5(@astrojs/starlight@0.38.4(astro@6.2.1(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.2)(terser@5.46.2)(typescript@5.9.3)(yaml@2.8.4)))(typedoc-plugin-markdown@4.11.0(typedoc@0.28.19(typescript@5.9.3)))(typedoc@0.28.19(typescript@5.9.3))
+      sugar-high:
+        specifier: ^1.1.0
+        version: 1.1.0
       tailwind-merge:
         specifier: ^3.5.0
         version: 3.5.0
@@ -3776,6 +3776,9 @@ packages:
 
   suf-log@2.5.3:
     resolution: {integrity: sha512-KvC8OPjzdNOe+xQ4XWJV2whQA0aM1kGVczMQ8+dStAO6KfEB140JEVQ9dE76ONZ0/Ylf67ni4tILPJB41U0eow==}
+
+  sugar-high@1.1.0:
+    resolution: {integrity: sha512-pL68G9H5VgK5z5aRAp8Yl4+obwbfEpr4BCCdO9V9JrWTFQiPMuN2GKxl9Vn/oxzkcS8TOTFFNti3LXe0UWX2Yw==}
 
   supports-color@7.2.0:
     resolution: {integrity: sha512-qpCAvRl9stuOHveKsn7HncJRvv501qIacKzQlO/+Lwxc9+0q2wLyv4Dfvt80/DPn2pqOBsJdDiogXGR9+OvwRw==}
@@ -8567,6 +8570,8 @@ snapshots:
   suf-log@2.5.3:
     dependencies:
       s.color: 0.0.15
+
+  sugar-high@1.1.0: {}
 
   supports-color@7.2.0:
     dependencies:
