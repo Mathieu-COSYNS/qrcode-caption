@@ -1,7 +1,6 @@
 // @ts-check
 import react from "@astrojs/react";
 import starlight from "@astrojs/starlight";
-import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
 import starlightChangelogs, { makeChangelogsSidebarLinks } from "starlight-changelogs";
 import starlightTypeDoc, { typeDocSidebarGroup } from "starlight-typedoc";
@@ -81,7 +80,4 @@ export default defineConfig({
     }),
     react(),
   ],
-  vite: {
-    plugins: [tailwindcss()],
-  },
 });
