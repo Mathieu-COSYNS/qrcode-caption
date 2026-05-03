@@ -1,5 +1,11 @@
 # qrcode-caption
 
+## 0.4.1
+
+### Patch Changes
+
+- 28ce8a1: Clearer JSDoc on core `toSVG` / `toDataURL` functions
+
 ## 0.4.0
 
 ### Minor Changes
