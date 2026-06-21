@@ -2,8 +2,6 @@
 title: How to use qrcode-caption
 ---
 
-
-
 **qrcode-caption** is a Node.js library that extends the functionality of the
 [qrcode](https://www.npmjs.com/package/qrcode) package, enabling users to
 generate QR codes with customizable captions.
