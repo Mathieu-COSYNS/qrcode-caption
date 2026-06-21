@@ -3,9 +3,9 @@ packages:
   - packages/*
   - tooling/*
 
-onlyBuiltDependencies:
-  - esbuild
-  - sharp
+allowBuilds:
+  esbuild: true
+  sharp: true
 
 # FIXME: https://github.com/prettier/prettier/issues/17565
 publicHoistPattern:
