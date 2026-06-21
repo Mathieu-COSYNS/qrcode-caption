@@ -29,11 +29,11 @@ export default defineConfig({
       sidebar: [
         {
           label: "Generate QR codes",
-          autogenerate: { directory: "generate" },
+          items: [{ autogenerate: { directory: "generate" } }],
         },
         {
           label: "Guides",
-          autogenerate: { directory: "guides" },
+          items: [{ autogenerate: { directory: "guides" } }],
         },
         typeDocSidebarGroup,
         ...makeChangelogsSidebarLinks([

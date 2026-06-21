@@ -19,9 +19,7 @@ content = content.replace(/^\n## License.*/ms, "");
 // Inject frontmatter
 const frontmatter = `---
 title: How to use qrcode-caption
----
-
-`;
+---`;
 
 fs.writeFileSync(target, frontmatter + content);
 
