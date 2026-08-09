@@ -17,7 +17,7 @@
   "devDependencies": {
     "@acme/prettier-config": "workspace:^",
     "@acme/tsconfig": "workspace:^",
-    "@changesets/cli": "^2.31.0",
+    "@changesets/cli": "^2.31.1",
     "@manypkg/cli": "^0.25.1",
     "prettier": "^3.8.4",
     "turbo": "^2.10.9",
