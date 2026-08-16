@@ -18,20 +18,43 @@ export const SaveButtons = ({
     if (!imageRef.current) return;
 
     const printContainer = document.createElement("div");
+    printContainer.id = "print-container";
     printContainer.style.position = "fixed";
     printContainer.style.inset = "0";
     printContainer.style.background = "white";
 
-    const clone = imageRef.current.cloneNode(true);
+    const clone = imageRef.current.cloneNode(true) as HTMLImageElement;
+    clone.style.width = "100%";
+    clone.style.maxHeight = "100%";
+    clone.style.objectFit = "contain";
     printContainer.appendChild(clone);
 
+    // Hide everything except the print container
+    const style = document.createElement("style");
+    style.innerHTML = `
+      @media print {
+        body > * {
+          display: none !important;
+        }
+
+        body > #print-container {
+          display: block !important;
+        }
+
+        @page {
+          margin: 0;
+        }
+      }
+    `;
+
+    document.head.appendChild(style);
     document.body.appendChild(printContainer);
     window.print();
     document.body.removeChild(printContainer);
+    document.head.removeChild(style);
   };
 
   const downloadImage = async (format: "image/svg" | "image/png" | "image/jpeg" | "image/webp") => {
-    console.log("download");
     if (!qrcodeSvgDataURL) return;
 
     const formattedDataURL =
