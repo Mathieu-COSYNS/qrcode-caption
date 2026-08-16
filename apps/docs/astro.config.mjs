@@ -21,7 +21,7 @@ export default defineConfig({
       ],
 
       editLink: {
-        baseUrl: "https://github.com/Mathieu-COSYNS/qrcode-caption/edit/main/app/docs/",
+        baseUrl: "https://github.com/Mathieu-COSYNS/qrcode-caption/edit/main/apps/docs/",
       },
 
       lastUpdated: true,
