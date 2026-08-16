@@ -105,6 +105,9 @@ importers:
         specifier: ^4.4.3
         version: 4.4.3
     devDependencies:
+      '@acme/prettier-config':
+        specifier: workspace:^
+        version: link:../../tooling/prettier
       '@tailwindcss/postcss':
         specifier: ^4.3.3
         version: 4.3.3
