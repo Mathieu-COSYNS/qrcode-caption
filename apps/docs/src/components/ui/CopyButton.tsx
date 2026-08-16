@@ -60,11 +60,16 @@ export function CopyButton({ value, size, convertToImage = false, ...props }: Co
   return (
     <Button size={size} onClick={handleCopy} {...props}>
       {copied !== null ? (
-        <CheckIcon className={cn("h-4 w-4", size !== "icon" && "mr-2")} />
+        <>
+          <CheckIcon className={cn("h-4 w-4", size !== "icon" && "mr-2")} />
+          <span className={cn(size === "icon" && "sr-only")}>Copied</span>
+        </>
       ) : (
-        <CopyIcon className={cn("h-4 w-4", size !== "icon" && "mr-2")} />
+        <>
+          <CopyIcon className={cn("h-4 w-4", size !== "icon" && "mr-2")} />
+          <span className={cn(size === "icon" && "sr-only")}>Copy</span>
+        </>
       )}
-      <span className={cn(size === "icon" && "sr-only")}>Copy</span>
     </Button>
   );
 }

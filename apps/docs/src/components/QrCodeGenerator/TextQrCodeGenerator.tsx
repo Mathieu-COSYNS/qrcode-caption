@@ -1,9 +1,8 @@
-import { useMemo } from "react";
+import { useLayoutEffect, useMemo, useRef } from "react";
 import { Form } from "@base-ui/react/form";
 import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
-import { FormProvider, useForm, useFormContext, useWatch } from "react-hook-form";
+import { FormProvider, useForm, useFormContext } from "react-hook-form";
 import TextareaAutosize from "react-textarea-autosize";
-import { useDebounce } from "use-debounce";
 import { z } from "zod";
 
 import { Input } from "~/components/ui/input";
@@ -16,7 +15,6 @@ const formSchema = z.object({
 });
 
 const TextQrCodeGeneratorForm = () => {
-  const value = useWatch();
   const form = useFormContext<z.input<typeof formSchema>, unknown, z.output<typeof formSchema>>();
 
   return (
@@ -43,6 +41,21 @@ export const TextQrCodeGenerator = () => {
     },
   });
 
+  // Used to get the data inserted before Hydration
+  const hydrated = useRef(false);
+  const formElementRef = useRef<HTMLFormElement>(null);
+  useLayoutEffect(() => {
+    if (hydrated.current) return;
+    hydrated.current = true;
+    const element = formElementRef.current;
+    if (!element) return;
+
+    form.reset({
+      text: (element.elements.namedItem("text") as HTMLTextAreaElement)?.value ?? "",
+      caption: (element.elements.namedItem("caption") as HTMLInputElement)?.value ?? "",
+    });
+  }, [form]);
+
   const values = form.watch();
 
   const qrcodeCaption = useMemo(
@@ -52,20 +65,17 @@ export const TextQrCodeGenerator = () => {
     }),
     [values],
   );
-  const [qrcodeCaptionDebounced] = useDebounce(qrcodeCaption, 100, {
-    equalityFn: (a, b) => a.data === b.data && a.caption === b.caption,
-  });
 
   return (
     <QrCodeGenerator
       form={
         <FormProvider {...form}>
-          <Form>
+          <Form ref={formElementRef}>
             <TextQrCodeGeneratorForm />
           </Form>
         </FormProvider>
       }
-      qrcodeCaption={qrcodeCaptionDebounced}
+      qrcodeCaption={qrcodeCaption}
     />
   );
 };

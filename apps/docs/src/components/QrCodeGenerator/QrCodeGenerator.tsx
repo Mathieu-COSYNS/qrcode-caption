@@ -1,6 +1,7 @@
 import { startTransition, useMemo, useRef, useState, type ReactNode } from "react";
 import { Code2Icon, FormInputIcon } from "lucide-react";
 import { toDataURL, type QRCodeOptions } from "qrcode-caption";
+import { useDebounce } from "use-debounce";
 
 import { FlipCardButton, FlipCardContent } from "~/components/ui/FlipCard";
 import { Skeleton } from "../ui/Skeleton";
@@ -18,15 +19,21 @@ export const QrCodeGenerator = ({
   const [showCode, setShowCode] = useState(false);
   const imageRef = useRef<HTMLImageElement | null>(null);
 
+  const [qrcodeCaptionDebounced] = useDebounce(qrcodeCaption, 100, {
+    equalityFn: (a, b) => a.data === b.data && a.caption === b.caption,
+  });
+
   const qrcodeSvgOrError = useMemo(() => {
     try {
-      return qrcodeCaption.data ? toDataURL(qrcodeCaption.data, qrcodeCaption.caption, qrcodeCaption.options) : null;
+      return qrcodeCaptionDebounced.data
+        ? toDataURL(qrcodeCaptionDebounced.data, qrcodeCaptionDebounced.caption, qrcodeCaptionDebounced.options)
+        : null;
     } catch (e) {
       if (e instanceof Error) {
         return e;
       }
     }
-  }, [qrcodeCaption]);
+  }, [qrcodeCaptionDebounced]);
 
   return (
     <div className="px-4">
@@ -55,7 +62,13 @@ export const QrCodeGenerator = ({
         <div className="mx-auto w-full max-w-(--sl-content-width) grow self-stretch">
           <FlipCardContent
             front={form}
-            back={<ImplementationCode className="absolute inset-2" qrcodeCaption={qrcodeCaption} update={showCode} />}
+            back={
+              <ImplementationCode
+                className="absolute inset-2"
+                qrcodeCaption={qrcodeCaptionDebounced}
+                update={showCode}
+              />
+            }
             showBack={showCode}
           />
         </div>
