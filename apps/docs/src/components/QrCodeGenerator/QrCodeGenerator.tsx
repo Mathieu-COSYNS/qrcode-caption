@@ -1,39 +1,44 @@
 import { startTransition, useMemo, useRef, useState, type ReactNode } from "react";
+import { Form } from "@base-ui/react/form";
+import type { StandardSchemaV1 } from "@standard-schema/spec";
 import { Code2Icon, FormInputIcon } from "lucide-react";
-import { toDataURL, type QRCodeOptions } from "qrcode-caption";
-import { useDebounce } from "use-debounce";
+import { toDataURL } from "qrcode-caption";
+import type { DefaultValues, FieldValues, UseFormReturn } from "react-hook-form";
 
 import { FlipCardButton, FlipCardContent } from "~/components/ui/FlipCard";
 import { Skeleton } from "../ui/Skeleton";
 import { SuspenseClientOnly } from "../ui/SuspenseClientOnly";
 import { ImplementationCode } from "./ImplementationCode";
 import { QrCodePreview } from "./QrCodePreview";
+import { useQrCodeForm, type QRCodeCaption } from "./useQrCodeForm";
 
-export const QrCodeGenerator = ({
-  form,
-  qrcodeCaption,
+export const QrCodeGenerator = <
+  TSchema extends StandardSchemaV1<FieldValues, QRCodeCaption> = StandardSchemaV1<FieldValues, QRCodeCaption>,
+>({
+  formSchema,
+  formDefaultValues,
+  formContent,
 }: {
-  form: ReactNode;
-  qrcodeCaption: { data: string; caption?: string | undefined; options?: QRCodeOptions };
+  formSchema: TSchema;
+  formDefaultValues: DefaultValues<StandardSchemaV1.InferInput<TSchema>>;
+  formContent: (
+    form: UseFormReturn<StandardSchemaV1.InferInput<TSchema>, unknown, StandardSchemaV1.InferOutput<TSchema>>,
+  ) => ReactNode;
 }) => {
   const [showCode, setShowCode] = useState(false);
   const imageRef = useRef<HTMLImageElement | null>(null);
 
-  const [qrcodeCaptionDebounced] = useDebounce(qrcodeCaption, 100, {
-    equalityFn: (a, b) => a.data === b.data && a.caption === b.caption,
-  });
+  const { form, formElementRef, qrcodeCaption } = useQrCodeForm(formSchema, formDefaultValues);
 
   const qrcodeSvgOrError = useMemo(() => {
     try {
-      return qrcodeCaptionDebounced.data
-        ? toDataURL(qrcodeCaptionDebounced.data, qrcodeCaptionDebounced.caption, qrcodeCaptionDebounced.options)
-        : null;
+      return qrcodeCaption.data ? toDataURL(qrcodeCaption.data, qrcodeCaption.caption, qrcodeCaption.options) : null;
     } catch (e) {
       if (e instanceof Error) {
         return e;
       }
     }
-  }, [qrcodeCaptionDebounced]);
+  }, [qrcodeCaption]);
 
   return (
     <div className="px-4">
@@ -61,14 +66,12 @@ export const QrCodeGenerator = ({
       <div className="mx-auto flex max-w-6xl items-start gap-6 max-xl:flex-col">
         <div className="mx-auto w-full max-w-(--sl-content-width) grow self-stretch">
           <FlipCardContent
-            front={form}
-            back={
-              <ImplementationCode
-                className="absolute inset-2"
-                qrcodeCaption={qrcodeCaptionDebounced}
-                update={showCode}
-              />
+            front={
+              <Form ref={formElementRef}>
+                <div className="space-y-4 p-6">{formContent(form)}</div>
+              </Form>
             }
+            back={<ImplementationCode className="absolute inset-2" qrcodeCaption={qrcodeCaption} update={showCode} />}
             showBack={showCode}
           />
         </div>
