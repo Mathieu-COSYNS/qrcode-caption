@@ -1,5 +1,11 @@
 # qrcode-caption
 
+## 0.4.2
+
+### Patch Changes
+
+- 6ebed58: migrate bundler from tsup to tsdown
+
 ## 0.4.1
 
 ### Patch Changes
