@@ -6,7 +6,7 @@ export default defineConfig([
     format: ["cjs", "esm"],
     dts: true,
     minify: false,
-    outExtension: ({ format }) => {
+    outExtensions: ({ format }) => {
       if (format === "es") return { js: ".js" };
     },
   },

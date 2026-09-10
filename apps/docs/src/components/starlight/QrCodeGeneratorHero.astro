@@ -3,7 +3,7 @@ import DraftContentNotice from "@astrojs/starlight/components/DraftContentNotice
 import FallbackContentNotice from "@astrojs/starlight/components/FallbackContentNotice.astro";
 import PageTitle from "@astrojs/starlight/components/PageTitle.astro";
 
-import { getLocaleRoutes } from "~/../node_modules/@astrojs/starlight/utils/routing";
+import { getLocaleRoutes } from "~/../node_modules/@astrojs/starlight/dist/utils/routing/index.js";
 import { TextQrCodeGenerator } from "~/components/QrCodeGenerator";
 import { buttonVariants } from "~/components/ui/Button";
 import { Icon } from "~/components/ui/Icon";
@@ -40,23 +40,19 @@ const qrCodeGeneratorLinks = getLocaleRoutes(locale)
 
 <div class="flex flex-col items-center gap-6 text-center">
   <PageTitle {...Astro.props} />
-  {
-    qrCodeGeneratorLinks.length > 1 ? (
-      <ul class="flex list-none flex-wrap justify-center gap-2" data-pagefind-ignore>
-        {qrCodeGeneratorLinks.map((link) => (
-          <li>
-            <a class={cn(buttonVariants({ variant: link.active ? "primary" : "secondary" }))} href={link.href}>
-              {link.icon && <Icon name={link.icon} className="mr-2 h-4 w-4" />}
-              {link.label}
-            </a>
-          </li>
-        ))}
-      </ul>
-    ) : null
-  }
+  {qrCodeGeneratorLinks.length > 1 ? (
+    <ul class="flex list-none flex-wrap justify-center gap-2" data-pagefind-ignore>
+      {qrCodeGeneratorLinks.map((link) => (
+        <li>
+          <a class={cn(buttonVariants({ variant: link.active ? "primary" : "secondary" }))} href={link.href}>
+            {link.icon && <Icon name={link.icon} className="mr-2 h-4 w-4" />}
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  ) : null}
   {starlightRoute.entry.data.draft && <DraftContentNotice />}
   {starlightRoute.isFallback && <FallbackContentNotice />}
 </div>
-<div class="mt-12 mb-24">
-  {hero.generatorType === "text" && <TextQrCodeGenerator client:load />}
-</div>
+<div class="mt-12 mb-24">{hero.generatorType === "text" && <TextQrCodeGenerator client:load />}</div>
