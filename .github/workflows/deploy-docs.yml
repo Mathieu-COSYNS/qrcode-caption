@@ -19,32 +19,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout your repository using git
-        uses: actions/checkout@v6
-      - uses: pnpm/action-setup@v5
-      - uses: actions/setup-node@v6
+        uses: actions/checkout@v7
+      - uses: pnpm/setup@v2
         with:
-          node-version: 24
-          cache: "pnpm"
-          cache-dependency-path: "./pnpm-lock.yaml"
-
-      - name: Install core dependencies
-        run: pnpm install --frozen-lockfile
-        working-directory: ./packages/core
+          runtime: node@24
+          cache: true
 
       - name: Build core
         run: pnpm build
         working-directory: ./packages/core
-
-      - name: Install docs dependencies
-        run: pnpm install --frozen-lockfile
-        working-directory: ./apps/docs
 
       - name: Build docs
         run: pnpm build
         working-directory: ./apps/docs
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v5.0.0
+        uses: actions/upload-pages-artifact@v5
         with:
           path: ./apps/docs/dist
 

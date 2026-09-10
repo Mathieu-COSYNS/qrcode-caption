@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [22, 24]
+        node: [22, 24, 26]
     name: Node ${{ matrix.node }}
     steps:
       - name: Install fonts for SVG rendering
@@ -27,14 +27,11 @@ jobs:
           sudo fc-cache -f -v
           fc-list | grep -iE "verdana"
 
-      - uses: actions/checkout@v6
-      - uses: pnpm/action-setup@v5
-      - uses: actions/setup-node@v6
+      - uses: actions/checkout@v7
+      - uses: pnpm/setup@v2
         with:
-          node-version: ${{ matrix.node }}
-          cache: "pnpm"
-
-      - run: pnpm install --frozen-lockfile
+          runtime: node@${{ matrix.node }}
+          cache: true
 
       - run: pnpm run lint
       - run: pnpm run typecheck
